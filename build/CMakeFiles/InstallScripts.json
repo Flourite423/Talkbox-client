@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/ltc/Program/Talkbox/Talkbox-client/build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
