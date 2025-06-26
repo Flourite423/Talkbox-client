@@ -1,11 +1,11 @@
 CMakeFiles/Talkbox-client.dir/Talkbox-client_autogen/mocs_compilation.cpp.o: \
  /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/mocs_compilation.cpp \
  /usr/include/stdc-predef.h \
- /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/UVLADIE3JM/moc_apiclient.cpp \
- /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/UVLADIE3JM/../../../src/apiclient.h \
- /usr/include/qt6/QtCore/QObject /usr/include/qt6/QtCore/qobject.h \
- /usr/include/qt6/QtCore/qobjectdefs.h \
- /usr/include/qt6/QtCore/qnamespace.h /usr/include/qt6/QtCore/qglobal.h \
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/QMBYO36SBA/moc_LoginDialog.cpp \
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/QMBYO36SBA/../../../src/auth/LoginDialog.h \
+ /usr/include/qt6/QtWidgets/QDialog /usr/include/qt6/QtWidgets/qdialog.h \
+ /usr/include/qt6/QtWidgets/qtwidgetsglobal.h \
+ /usr/include/qt6/QtGui/qtguiglobal.h /usr/include/qt6/QtCore/qglobal.h \
  /usr/include/c++/15.1.1/type_traits \
  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/c++config.h \
  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/os_defines.h \
@@ -146,7 +146,14 @@ CMakeFiles/Talkbox-client.dir/Talkbox-client_autogen/mocs_compilation.cpp.o: \
  /usr/include/qt6/QtCore/qtresource.h \
  /usr/include/qt6/QtCore/qttranslation.h \
  /usr/include/qt6/QtCore/qversiontagging.h \
- /usr/include/qt6/QtCore/qcompare.h \
+ /usr/include/qt6/QtGui/qtgui-config.h \
+ /usr/include/qt6/QtGui/qtguiexports.h \
+ /usr/include/qt6/QtWidgets/qtwidgets-config.h \
+ /usr/include/qt6/QtWidgets/qtwidgetsexports.h \
+ /usr/include/qt6/QtWidgets/qwidget.h \
+ /usr/include/qt6/QtGui/qwindowdefs.h \
+ /usr/include/qt6/QtCore/qobjectdefs.h \
+ /usr/include/qt6/QtCore/qnamespace.h /usr/include/qt6/QtCore/qcompare.h \
  /usr/include/qt6/QtCore/qstdlibdetection.h \
  /usr/include/qt6/QtCore/qcomparehelpers.h \
  /usr/include/qt6/QtCore/q20type_traits.h \
@@ -214,8 +221,8 @@ CMakeFiles/Talkbox-client.dir/Talkbox-client_autogen/mocs_compilation.cpp.o: \
  /usr/include/c++/15.1.1/bits/shared_ptr_atomic.h \
  /usr/include/c++/15.1.1/backward/auto_ptr.h \
  /usr/include/c++/15.1.1/pstl/glue_memory_defs.h \
- /usr/include/qt6/QtCore/qstring.h /usr/include/qt6/QtCore/qchar.h \
- /usr/include/qt6/QtCore/qstringview.h \
+ /usr/include/qt6/QtCore/qobject.h /usr/include/qt6/QtCore/qstring.h \
+ /usr/include/qt6/QtCore/qchar.h /usr/include/qt6/QtCore/qstringview.h \
  /usr/include/qt6/QtCore/qbytearray.h /usr/include/qt6/QtCore/qrefcount.h \
  /usr/include/qt6/QtCore/qarraydata.h /usr/include/qt6/QtCore/qpair.h \
  /usr/include/string.h /usr/include/strings.h \
@@ -299,29 +306,28 @@ CMakeFiles/Talkbox-client.dir/Talkbox-client_autogen/mocs_compilation.cpp.o: \
  /usr/include/qt6/QtCore/qobject_impl.h \
  /usr/include/qt6/QtCore/qbindingstorage.h /usr/include/c++/15.1.1/chrono \
  /usr/include/c++/15.1.1/bits/chrono.h /usr/include/c++/15.1.1/ratio \
- /usr/include/c++/15.1.1/ctime \
- /usr/include/qt6/QtNetwork/QNetworkAccessManager \
- /usr/include/qt6/QtNetwork/qnetworkaccessmanager.h \
- /usr/include/qt6/QtNetwork/qtnetworkglobal.h \
- /usr/include/qt6/QtNetwork/qtnetwork-config.h \
- /usr/include/qt6/QtNetwork/qtnetworkexports.h \
- /usr/include/qt6/QtNetwork/qnetworkrequest.h \
- /usr/include/qt6/QtNetwork/qhttpheaders.h \
- /usr/include/qt6/QtCore/qshareddata.h \
- /usr/include/qt6/QtCore/QSharedDataPointer \
- /usr/include/qt6/QtCore/qshareddata.h /usr/include/qt6/QtCore/QString \
- /usr/include/qt6/QtCore/qstring.h /usr/include/qt6/QtCore/QUrl \
- /usr/include/qt6/QtCore/qurl.h /usr/include/qt6/QtCore/QVariant \
- /usr/include/qt6/QtCore/qvariant.h /usr/include/qt6/QtCore/qdebug.h \
- /usr/include/qt6/QtCore/qtextstream.h \
- /usr/include/qt6/QtCore/qcontiguouscache.h \
- /usr/include/c++/15.1.1/climits \
+ /usr/include/c++/15.1.1/ctime /usr/include/qt6/QtCore/qmargins.h \
+ /usr/include/qt6/QtCore/q23utility.h \
+ /usr/include/qt6/QtCore/q20utility.h /usr/include/qt6/QtGui/qaction.h \
+ /usr/include/qt6/QtGui/qkeysequence.h /usr/include/qt6/QtGui/qicon.h \
+ /usr/include/qt6/QtCore/qsize.h /usr/include/qt6/QtGui/qpixmap.h \
+ /usr/include/qt6/QtGui/qpaintdevice.h /usr/include/qt6/QtCore/qrect.h \
+ /usr/include/qt6/QtCore/qpoint.h /usr/include/qt6/QtGui/qcolor.h \
+ /usr/include/qt6/QtGui/qrgb.h /usr/include/qt6/QtGui/qrgba64.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/include/limits.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/include/syslimits.h \
  /usr/include/limits.h /usr/include/bits/posix1_lim.h \
  /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
  /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
- /usr/include/bits/uio_lim.h /usr/include/qt6/QtCore/qsharedpointer.h \
+ /usr/include/bits/uio_lim.h /usr/include/qt6/QtCore/qshareddata.h \
+ /usr/include/qt6/QtGui/qimage.h /usr/include/qt6/QtGui/qpixelformat.h \
+ /usr/include/qt6/QtGui/qtransform.h /usr/include/qt6/QtGui/qpolygon.h \
+ /usr/include/qt6/QtGui/qregion.h /usr/include/qt6/QtCore/qspan.h \
+ /usr/include/c++/15.1.1/cassert /usr/include/qt6/QtCore/q20iterator.h \
+ /usr/include/qt6/QtCore/qline.h /usr/include/qt6/QtCore/qvariant.h \
+ /usr/include/qt6/QtCore/qdebug.h /usr/include/qt6/QtCore/qtextstream.h \
+ /usr/include/qt6/QtCore/qcontiguouscache.h \
+ /usr/include/c++/15.1.1/climits /usr/include/qt6/QtCore/qsharedpointer.h \
  /usr/include/qt6/QtCore/qsharedpointer_impl.h \
  /usr/include/c++/15.1.1/set /usr/include/c++/15.1.1/bits/stl_set.h \
  /usr/include/c++/15.1.1/bits/stl_multiset.h \
@@ -331,19 +337,38 @@ CMakeFiles/Talkbox-client.dir/Talkbox-client_autogen/mocs_compilation.cpp.o: \
  /usr/include/qt6/QtCore/qshareddata_impl.h \
  /usr/include/qt6/QtCore/qset.h /usr/include/qt6/QtCore/qhash.h \
  /usr/include/qt6/QtCore/qvarlengtharray.h \
- /usr/include/qt6/QtCore/q23utility.h \
- /usr/include/qt6/QtCore/q20utility.h /usr/include/qt6/QtCore/qobject.h \
- /usr/include/qt6/QtCore/q26numeric.h /usr/include/qt6/QtCore/QList \
- /usr/include/qt6/QtCore/qlist.h /usr/include/qt6/QtCore/QObject \
+ /usr/include/qt6/QtGui/qpalette.h /usr/include/qt6/QtGui/qbrush.h \
+ /usr/include/qt6/QtGui/qfont.h /usr/include/qt6/QtCore/qendian.h \
+ /usr/include/qt6/QtGui/qfontmetrics.h /usr/include/qt6/QtGui/qfontinfo.h \
+ /usr/include/qt6/QtGui/qfontvariableaxis.h \
+ /usr/include/qt6/QtWidgets/qsizepolicy.h \
+ /usr/include/qt6/QtGui/qcursor.h /usr/include/qt6/QtGui/qbitmap.h \
+ /usr/include/qt6/QtWidgets/QStackedWidget \
+ /usr/include/qt6/QtWidgets/qstackedwidget.h \
+ /usr/include/qt6/QtWidgets/qframe.h \
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/QMBYO36SBA/../../../src/auth/../common/HttpClient.h \
+ /usr/include/qt6/QtCore/QObject /usr/include/qt6/QtCore/qobject.h \
+ /usr/include/qt6/QtNetwork/QNetworkAccessManager \
+ /usr/include/qt6/QtNetwork/qnetworkaccessmanager.h \
+ /usr/include/qt6/QtNetwork/qtnetworkglobal.h \
+ /usr/include/qt6/QtNetwork/qtnetwork-config.h \
+ /usr/include/qt6/QtNetwork/qtnetworkexports.h \
+ /usr/include/qt6/QtNetwork/qnetworkrequest.h \
+ /usr/include/qt6/QtNetwork/qhttpheaders.h \
+ /usr/include/qt6/QtCore/QSharedDataPointer \
+ /usr/include/qt6/QtCore/qshareddata.h /usr/include/qt6/QtCore/QString \
+ /usr/include/qt6/QtCore/qstring.h /usr/include/qt6/QtCore/QUrl \
+ /usr/include/qt6/QtCore/qurl.h /usr/include/qt6/QtCore/QVariant \
+ /usr/include/qt6/QtCore/qvariant.h /usr/include/qt6/QtCore/q26numeric.h \
+ /usr/include/qt6/QtCore/QList /usr/include/qt6/QtCore/qlist.h \
+ /usr/include/qt6/QtCore/QObject \
  /usr/include/qt6/QtNetwork/QSslConfiguration \
  /usr/include/qt6/QtNetwork/qsslconfiguration.h \
  /usr/include/qt6/QtNetwork/qsslsocket.h \
  /usr/include/qt6/QtNetwork/qtcpsocket.h \
  /usr/include/qt6/QtNetwork/qabstractsocket.h \
- /usr/include/qt6/QtCore/qiodevice.h /usr/include/qt6/QtCore/qspan.h \
- /usr/include/c++/15.1.1/cassert /usr/include/qt6/QtCore/q20iterator.h \
+ /usr/include/qt6/QtCore/qiodevice.h \
  /usr/include/qt6/QtNetwork/qhostaddress.h \
- /usr/include/qt6/QtCore/qvariant.h \
  /usr/include/qt6/QtNetwork/qsslerror.h \
  /usr/include/qt6/QtNetwork/qsslcertificate.h \
  /usr/include/qt6/QtCore/qcryptographichash.h \
@@ -366,56 +391,64 @@ CMakeFiles/Talkbox-client.dir/Talkbox-client_autogen/mocs_compilation.cpp.o: \
  /usr/include/qt6/QtCore/qcborcommon.h \
  /usr/include/qt6/QtCore/qregularexpression.h \
  /usr/include/qt6/QtCore/qurl.h /usr/include/qt6/QtCore/quuid.h \
- /usr/include/qt6/QtCore/qendian.h \
  /usr/include/qt6/QtCore/qjsondocument.h \
  /usr/include/qt6/QtCore/qjsonparseerror.h \
  /usr/include/qt6/QtCore/QJsonDocument \
- /usr/include/qt6/QtCore/qjsondocument.h /usr/include/qt6/QtCore/QString \
+ /usr/include/qt6/QtCore/qjsondocument.h /usr/include/qt6/QtCore/QTimer \
+ /usr/include/qt6/QtCore/qtimer.h /usr/include/qt6/QtCore/qbasictimer.h \
+ /usr/include/qt6/QtCore/qabstracteventdispatcher.h \
+ /usr/include/qt6/QtCore/qeventloop.h \
+ /usr/include/qt6/QtCore/qdeadlinetimer.h \
+ /usr/include/qt6/QtCore/qelapsedtimer.h \
  /usr/include/qt6/QtNetwork/QSslError \
  /usr/include/qt6/QtNetwork/qsslerror.h \
  /usr/include/qt6/QtCore/qtmochelpers.h \
  /usr/include/qt6/QtCore/qtmocconstants.h \
  /usr/include/qt6/QtCore/q20algorithm.h \
  /usr/include/qt6/QtCore/q23type_traits.h \
- /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/UVLADIE3JM/moc_appmanager.cpp \
- /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/UVLADIE3JM/../../../src/appmanager.h \
- /usr/include/qt6/QtWidgets/QStackedWidget \
- /usr/include/qt6/QtWidgets/qstackedwidget.h \
- /usr/include/qt6/QtWidgets/qtwidgetsglobal.h \
- /usr/include/qt6/QtGui/qtguiglobal.h \
- /usr/include/qt6/QtGui/qtgui-config.h \
- /usr/include/qt6/QtGui/qtguiexports.h \
- /usr/include/qt6/QtWidgets/qtwidgets-config.h \
- /usr/include/qt6/QtWidgets/qtwidgetsexports.h \
- /usr/include/qt6/QtWidgets/qframe.h /usr/include/qt6/QtWidgets/qwidget.h \
- /usr/include/qt6/QtGui/qwindowdefs.h /usr/include/qt6/QtCore/qmargins.h \
- /usr/include/qt6/QtGui/qaction.h /usr/include/qt6/QtGui/qkeysequence.h \
- /usr/include/qt6/QtGui/qicon.h /usr/include/qt6/QtCore/qsize.h \
- /usr/include/qt6/QtGui/qpixmap.h /usr/include/qt6/QtGui/qpaintdevice.h \
- /usr/include/qt6/QtCore/qrect.h /usr/include/qt6/QtCore/qpoint.h \
- /usr/include/qt6/QtGui/qcolor.h /usr/include/qt6/QtGui/qrgb.h \
- /usr/include/qt6/QtGui/qrgba64.h /usr/include/qt6/QtGui/qimage.h \
- /usr/include/qt6/QtGui/qpixelformat.h \
- /usr/include/qt6/QtGui/qtransform.h /usr/include/qt6/QtGui/qpolygon.h \
- /usr/include/qt6/QtGui/qregion.h /usr/include/qt6/QtCore/qline.h \
- /usr/include/qt6/QtGui/qpalette.h /usr/include/qt6/QtGui/qbrush.h \
- /usr/include/qt6/QtGui/qfont.h /usr/include/qt6/QtGui/qfontmetrics.h \
- /usr/include/qt6/QtGui/qfontinfo.h \
- /usr/include/qt6/QtGui/qfontvariableaxis.h \
- /usr/include/qt6/QtWidgets/qsizepolicy.h \
- /usr/include/qt6/QtGui/qcursor.h /usr/include/qt6/QtGui/qbitmap.h \
- /usr/include/qt6/QtCore/QJsonArray /usr/include/qt6/QtCore/qjsonarray.h \
- /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/QMBYO36SBA/moc_loginwidget.cpp \
- /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/QMBYO36SBA/../../../src/auth/loginwidget.h \
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/QMBYO36SBA/moc_RegisterDialog.cpp \
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/QMBYO36SBA/../../../src/auth/RegisterDialog.h \
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/O5MXRAE5KY/moc_ChatWindow.cpp \
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/O5MXRAE5KY/../../../src/chat/ChatWindow.h \
  /usr/include/qt6/QtWidgets/QWidget /usr/include/qt6/QtWidgets/qwidget.h \
- /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/QMBYO36SBA/moc_registerwidget.cpp \
- /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/QMBYO36SBA/../../../src/auth/registerwidget.h \
- /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/O5MXRAE5KY/moc_chatmainwidget.cpp \
- /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/O5MXRAE5KY/../../../src/chat/chatmainwidget.h \
- /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/GGFZP522KP/moc_forummainwidget.cpp \
- /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/GGFZP522KP/../../../src/forum/forummainwidget.h \
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/O5MXRAE5KY/../../../src/chat/../common/HttpClient.h \
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/O5MXRAE5KY/moc_ContactList.cpp \
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/O5MXRAE5KY/../../../src/chat/ContactList.h \
+ /usr/include/qt6/QtWidgets/QListWidget \
+ /usr/include/qt6/QtWidgets/qlistwidget.h \
+ /usr/include/qt6/QtWidgets/qlistview.h \
+ /usr/include/qt6/QtWidgets/qabstractitemview.h \
+ /usr/include/qt6/QtWidgets/qabstractscrollarea.h \
+ /usr/include/qt6/QtCore/qabstractitemmodel.h \
+ /usr/include/qt6/QtCore/qitemselectionmodel.h \
+ /usr/include/qt6/QtWidgets/qabstractitemdelegate.h \
+ /usr/include/qt6/QtWidgets/qstyleoption.h \
+ /usr/include/qt6/QtWidgets/qabstractspinbox.h \
+ /usr/include/qt6/QtGui/qvalidator.h /usr/include/qt6/QtWidgets/qslider.h \
+ /usr/include/qt6/QtWidgets/qabstractslider.h \
+ /usr/include/qt6/QtWidgets/qstyle.h /usr/include/qt6/QtWidgets/qtabbar.h \
+ /usr/include/qt6/QtWidgets/qtabwidget.h \
+ /usr/include/qt6/QtWidgets/qrubberband.h \
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/O5MXRAE5KY/moc_GroupManager.cpp \
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/O5MXRAE5KY/../../../src/chat/GroupManager.h \
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/2PZEZPHIBF/moc_HttpClient.cpp \
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/2PZEZPHIBF/../../../src/common/HttpClient.h \
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/GGFZP522KP/moc_CreatePost.cpp \
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/GGFZP522KP/../../../src/forum/CreatePost.h \
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/GGFZP522KP/../../../src/forum/../common/HttpClient.h \
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/GGFZP522KP/moc_ForumWidget.cpp \
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/GGFZP522KP/../../../src/forum/ForumWidget.h \
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/GGFZP522KP/moc_PostDetail.cpp \
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/GGFZP522KP/../../../src/forum/PostDetail.h \
  /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/UVLADIE3JM/moc_mainwindow.cpp \
  /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/UVLADIE3JM/../../../src/mainwindow.h \
  /usr/include/qt6/QtWidgets/QMainWindow \
  /usr/include/qt6/QtWidgets/qmainwindow.h \
- /usr/include/qt6/QtWidgets/qtabwidget.h
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/UVLADIE3JM/../../../src/common/HttpClient.h \
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/UVLADIE3JM/../../../src/auth/LoginDialog.h \
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/UVLADIE3JM/../../../src/chat/ContactList.h \
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/UVLADIE3JM/../../../src/chat/ChatWindow.h \
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/UVLADIE3JM/../../../src/chat/GroupManager.h \
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/UVLADIE3JM/../../../src/forum/ForumWidget.h \
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/UVLADIE3JM/../../../src/forum/PostDetail.h \
+ /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/UVLADIE3JM/../../../src/forum/CreatePost.h

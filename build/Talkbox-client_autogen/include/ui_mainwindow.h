@@ -12,12 +12,13 @@
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
-#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -25,92 +26,118 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
-    QAction *actionLogin;
     QAction *actionLogout;
-    QAction *actionExit;
-    QAction *actionPreferences;
-    QAction *actionFullscreen;
     QAction *actionAbout;
     QWidget *centralwidget;
-    QVBoxLayout *centralLayout;
-    QTabWidget *mainTabWidget;
+    QHBoxLayout *horizontalLayout;
+    QTabWidget *tabWidget;
     QWidget *chatTab;
+    QHBoxLayout *chatLayout;
+    QWidget *contactWidget;
+    QWidget *chatWidget;
+    QWidget *groupTab;
+    QHBoxLayout *groupLayout;
+    QWidget *groupManagerWidget;
+    QWidget *groupChatWidget;
     QWidget *forumTab;
-    QWidget *settingsTab;
+    QHBoxLayout *forumLayout;
+    QWidget *forumListWidget;
+    QWidget *forumDetailWidget;
     QMenuBar *menubar;
-    QMenu *menuFile;
-    QMenu *menuEdit;
-    QMenu *menuView;
+    QMenu *menuUser;
     QMenu *menuHelp;
     QStatusBar *statusbar;
+    QLabel *userLabel;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(800, 600);
-        actionLogin = new QAction(MainWindow);
-        actionLogin->setObjectName("actionLogin");
+        MainWindow->resize(1200, 800);
         actionLogout = new QAction(MainWindow);
         actionLogout->setObjectName("actionLogout");
-        actionExit = new QAction(MainWindow);
-        actionExit->setObjectName("actionExit");
-        actionPreferences = new QAction(MainWindow);
-        actionPreferences->setObjectName("actionPreferences");
-        actionFullscreen = new QAction(MainWindow);
-        actionFullscreen->setObjectName("actionFullscreen");
         actionAbout = new QAction(MainWindow);
         actionAbout->setObjectName("actionAbout");
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
-        centralLayout = new QVBoxLayout(centralwidget);
-        centralLayout->setObjectName("centralLayout");
-        mainTabWidget = new QTabWidget(centralwidget);
-        mainTabWidget->setObjectName("mainTabWidget");
+        horizontalLayout = new QHBoxLayout(centralwidget);
+        horizontalLayout->setObjectName("horizontalLayout");
+        tabWidget = new QTabWidget(centralwidget);
+        tabWidget->setObjectName("tabWidget");
         chatTab = new QWidget();
         chatTab->setObjectName("chatTab");
-        mainTabWidget->addTab(chatTab, QString());
+        chatLayout = new QHBoxLayout(chatTab);
+        chatLayout->setObjectName("chatLayout");
+        contactWidget = new QWidget(chatTab);
+        contactWidget->setObjectName("contactWidget");
+        contactWidget->setMaximumSize(QSize(300, 16777215));
+
+        chatLayout->addWidget(contactWidget);
+
+        chatWidget = new QWidget(chatTab);
+        chatWidget->setObjectName("chatWidget");
+
+        chatLayout->addWidget(chatWidget);
+
+        tabWidget->addTab(chatTab, QString());
+        groupTab = new QWidget();
+        groupTab->setObjectName("groupTab");
+        groupLayout = new QHBoxLayout(groupTab);
+        groupLayout->setObjectName("groupLayout");
+        groupManagerWidget = new QWidget(groupTab);
+        groupManagerWidget->setObjectName("groupManagerWidget");
+        groupManagerWidget->setMaximumSize(QSize(400, 16777215));
+
+        groupLayout->addWidget(groupManagerWidget);
+
+        groupChatWidget = new QWidget(groupTab);
+        groupChatWidget->setObjectName("groupChatWidget");
+
+        groupLayout->addWidget(groupChatWidget);
+
+        tabWidget->addTab(groupTab, QString());
         forumTab = new QWidget();
         forumTab->setObjectName("forumTab");
-        mainTabWidget->addTab(forumTab, QString());
-        settingsTab = new QWidget();
-        settingsTab->setObjectName("settingsTab");
-        mainTabWidget->addTab(settingsTab, QString());
+        forumLayout = new QHBoxLayout(forumTab);
+        forumLayout->setObjectName("forumLayout");
+        forumListWidget = new QWidget(forumTab);
+        forumListWidget->setObjectName("forumListWidget");
+        forumListWidget->setMaximumSize(QSize(400, 16777215));
 
-        centralLayout->addWidget(mainTabWidget);
+        forumLayout->addWidget(forumListWidget);
+
+        forumDetailWidget = new QWidget(forumTab);
+        forumDetailWidget->setObjectName("forumDetailWidget");
+
+        forumLayout->addWidget(forumDetailWidget);
+
+        tabWidget->addTab(forumTab, QString());
+
+        horizontalLayout->addWidget(tabWidget);
 
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 800, 31));
-        menuFile = new QMenu(menubar);
-        menuFile->setObjectName("menuFile");
-        menuEdit = new QMenu(menubar);
-        menuEdit->setObjectName("menuEdit");
-        menuView = new QMenu(menubar);
-        menuView->setObjectName("menuView");
+        menubar->setGeometry(QRect(0, 0, 1200, 31));
+        menuUser = new QMenu(menubar);
+        menuUser->setObjectName("menuUser");
         menuHelp = new QMenu(menubar);
         menuHelp->setObjectName("menuHelp");
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
+        userLabel = new QLabel(statusbar);
+        userLabel->setObjectName("userLabel");
         MainWindow->setStatusBar(statusbar);
 
-        menubar->addAction(menuFile->menuAction());
-        menubar->addAction(menuEdit->menuAction());
-        menubar->addAction(menuView->menuAction());
+        menubar->addAction(menuUser->menuAction());
         menubar->addAction(menuHelp->menuAction());
-        menuFile->addAction(actionLogin);
-        menuFile->addAction(actionLogout);
-        menuFile->addSeparator();
-        menuFile->addAction(actionExit);
-        menuEdit->addAction(actionPreferences);
-        menuView->addAction(actionFullscreen);
+        menuUser->addAction(actionLogout);
         menuHelp->addAction(actionAbout);
 
         retranslateUi(MainWindow);
 
-        mainTabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -118,66 +145,15 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Talkbox", nullptr));
-        MainWindow->setStyleSheet(QCoreApplication::translate("MainWindow", "QMainWindow {\n"
-"    background-color: #f5f5f5;\n"
-"    font-family: 'Microsoft YaHei', Arial, sans-serif;\n"
-"}\n"
-"\n"
-"QMenuBar {\n"
-"    background-color: #007acc;\n"
-"    color: white;\n"
-"    border: none;\n"
-"}\n"
-"\n"
-"QMenuBar::item {\n"
-"    background: transparent;\n"
-"    padding: 8px 16px;\n"
-"}\n"
-"\n"
-"QMenuBar::item:selected {\n"
-"    background-color: #005999;\n"
-"}\n"
-"\n"
-"QStatusBar {\n"
-"    background-color: #333;\n"
-"    color: white;\n"
-"}", nullptr));
-        actionLogin->setText(QCoreApplication::translate("MainWindow", "\347\231\273\345\275\225", nullptr));
-        actionLogout->setText(QCoreApplication::translate("MainWindow", "\351\200\200\345\207\272\347\231\273\345\275\225", nullptr));
-        actionExit->setText(QCoreApplication::translate("MainWindow", "\351\200\200\345\207\272", nullptr));
-        actionPreferences->setText(QCoreApplication::translate("MainWindow", "\351\246\226\351\200\211\351\241\271", nullptr));
-        actionFullscreen->setText(QCoreApplication::translate("MainWindow", "\345\205\250\345\261\217", nullptr));
+        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Talkbox - \350\201\212\345\244\251\350\275\257\344\273\266", nullptr));
+        actionLogout->setText(QCoreApplication::translate("MainWindow", "\347\231\273\345\207\272", nullptr));
         actionAbout->setText(QCoreApplication::translate("MainWindow", "\345\205\263\344\272\216", nullptr));
-        mainTabWidget->setStyleSheet(QCoreApplication::translate("MainWindow", "QTabWidget::pane {\n"
-"    border: 1px solid #ddd;\n"
-"    background-color: white;\n"
-"}\n"
-"\n"
-"QTabBar::tab {\n"
-"    background-color: #e9ecef;\n"
-"    padding: 8px 16px;\n"
-"    margin-right: 2px;\n"
-"    border-top-left-radius: 4px;\n"
-"    border-top-right-radius: 4px;\n"
-"}\n"
-"\n"
-"QTabBar::tab:selected {\n"
-"    background-color: #007acc;\n"
-"    color: white;\n"
-"}\n"
-"\n"
-"QTabBar::tab:hover {\n"
-"    background-color: #0056b3;\n"
-"    color: white;\n"
-"}", nullptr));
-        mainTabWidget->setTabText(mainTabWidget->indexOf(chatTab), QCoreApplication::translate("MainWindow", "\350\201\212\345\244\251", nullptr));
-        mainTabWidget->setTabText(mainTabWidget->indexOf(forumTab), QCoreApplication::translate("MainWindow", "\350\256\272\345\235\233", nullptr));
-        mainTabWidget->setTabText(mainTabWidget->indexOf(settingsTab), QCoreApplication::translate("MainWindow", "\350\256\276\347\275\256", nullptr));
-        menuFile->setTitle(QCoreApplication::translate("MainWindow", "\346\226\207\344\273\266", nullptr));
-        menuEdit->setTitle(QCoreApplication::translate("MainWindow", "\347\274\226\350\276\221", nullptr));
-        menuView->setTitle(QCoreApplication::translate("MainWindow", "\350\247\206\345\233\276", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(chatTab), QCoreApplication::translate("MainWindow", "\350\201\212\345\244\251", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(groupTab), QCoreApplication::translate("MainWindow", "\347\276\244\347\273\204", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(forumTab), QCoreApplication::translate("MainWindow", "\350\256\272\345\235\233", nullptr));
+        menuUser->setTitle(QCoreApplication::translate("MainWindow", "\347\224\250\346\210\267", nullptr));
         menuHelp->setTitle(QCoreApplication::translate("MainWindow", "\345\270\256\345\212\251", nullptr));
+        userLabel->setText(QCoreApplication::translate("MainWindow", "\346\234\252\347\231\273\345\275\225", nullptr));
     } // retranslateUi
 
 };

@@ -69,13 +69,20 @@ include CMakeFiles/Talkbox-client.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Talkbox-client.dir/flags.make
 
+Talkbox-client_autogen/timestamp: /usr/lib/qt6/moc
+Talkbox-client_autogen/timestamp: /usr/lib/qt6/uic
+Talkbox-client_autogen/timestamp: CMakeFiles/Talkbox-client.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target Talkbox-client"
+	/usr/bin/cmake -E cmake_autogen /home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles/Talkbox-client_autogen.dir/AutogenInfo.json Debug
+	/usr/bin/cmake -E touch /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/timestamp
+
 CMakeFiles/Talkbox-client.dir/codegen:
 .PHONY : CMakeFiles/Talkbox-client.dir/codegen
 
 CMakeFiles/Talkbox-client.dir/Talkbox-client_autogen/mocs_compilation.cpp.o: CMakeFiles/Talkbox-client.dir/flags.make
 CMakeFiles/Talkbox-client.dir/Talkbox-client_autogen/mocs_compilation.cpp.o: Talkbox-client_autogen/mocs_compilation.cpp
 CMakeFiles/Talkbox-client.dir/Talkbox-client_autogen/mocs_compilation.cpp.o: CMakeFiles/Talkbox-client.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Talkbox-client.dir/Talkbox-client_autogen/mocs_compilation.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Talkbox-client.dir/Talkbox-client_autogen/mocs_compilation.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Talkbox-client.dir/Talkbox-client_autogen/mocs_compilation.cpp.o -MF CMakeFiles/Talkbox-client.dir/Talkbox-client_autogen/mocs_compilation.cpp.o.d -o CMakeFiles/Talkbox-client.dir/Talkbox-client_autogen/mocs_compilation.cpp.o -c /home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/mocs_compilation.cpp
 
 CMakeFiles/Talkbox-client.dir/Talkbox-client_autogen/mocs_compilation.cpp.i: cmake_force
@@ -89,7 +96,7 @@ CMakeFiles/Talkbox-client.dir/Talkbox-client_autogen/mocs_compilation.cpp.s: cma
 CMakeFiles/Talkbox-client.dir/src/main.cpp.o: CMakeFiles/Talkbox-client.dir/flags.make
 CMakeFiles/Talkbox-client.dir/src/main.cpp.o: /home/ltc/Program/Talkbox/Talkbox-client/src/main.cpp
 CMakeFiles/Talkbox-client.dir/src/main.cpp.o: CMakeFiles/Talkbox-client.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Talkbox-client.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Talkbox-client.dir/src/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Talkbox-client.dir/src/main.cpp.o -MF CMakeFiles/Talkbox-client.dir/src/main.cpp.o.d -o CMakeFiles/Talkbox-client.dir/src/main.cpp.o -c /home/ltc/Program/Talkbox/Talkbox-client/src/main.cpp
 
 CMakeFiles/Talkbox-client.dir/src/main.cpp.i: cmake_force
@@ -103,7 +110,7 @@ CMakeFiles/Talkbox-client.dir/src/main.cpp.s: cmake_force
 CMakeFiles/Talkbox-client.dir/src/mainwindow.cpp.o: CMakeFiles/Talkbox-client.dir/flags.make
 CMakeFiles/Talkbox-client.dir/src/mainwindow.cpp.o: /home/ltc/Program/Talkbox/Talkbox-client/src/mainwindow.cpp
 CMakeFiles/Talkbox-client.dir/src/mainwindow.cpp.o: CMakeFiles/Talkbox-client.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Talkbox-client.dir/src/mainwindow.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Talkbox-client.dir/src/mainwindow.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Talkbox-client.dir/src/mainwindow.cpp.o -MF CMakeFiles/Talkbox-client.dir/src/mainwindow.cpp.o.d -o CMakeFiles/Talkbox-client.dir/src/mainwindow.cpp.o -c /home/ltc/Program/Talkbox/Talkbox-client/src/mainwindow.cpp
 
 CMakeFiles/Talkbox-client.dir/src/mainwindow.cpp.i: cmake_force
@@ -114,101 +121,146 @@ CMakeFiles/Talkbox-client.dir/src/mainwindow.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Talkbox-client.dir/src/mainwindow.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ltc/Program/Talkbox/Talkbox-client/src/mainwindow.cpp -o CMakeFiles/Talkbox-client.dir/src/mainwindow.cpp.s
 
-CMakeFiles/Talkbox-client.dir/src/apiclient.cpp.o: CMakeFiles/Talkbox-client.dir/flags.make
-CMakeFiles/Talkbox-client.dir/src/apiclient.cpp.o: /home/ltc/Program/Talkbox/Talkbox-client/src/apiclient.cpp
-CMakeFiles/Talkbox-client.dir/src/apiclient.cpp.o: CMakeFiles/Talkbox-client.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Talkbox-client.dir/src/apiclient.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Talkbox-client.dir/src/apiclient.cpp.o -MF CMakeFiles/Talkbox-client.dir/src/apiclient.cpp.o.d -o CMakeFiles/Talkbox-client.dir/src/apiclient.cpp.o -c /home/ltc/Program/Talkbox/Talkbox-client/src/apiclient.cpp
+CMakeFiles/Talkbox-client.dir/src/auth/LoginDialog.cpp.o: CMakeFiles/Talkbox-client.dir/flags.make
+CMakeFiles/Talkbox-client.dir/src/auth/LoginDialog.cpp.o: /home/ltc/Program/Talkbox/Talkbox-client/src/auth/LoginDialog.cpp
+CMakeFiles/Talkbox-client.dir/src/auth/LoginDialog.cpp.o: CMakeFiles/Talkbox-client.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Talkbox-client.dir/src/auth/LoginDialog.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Talkbox-client.dir/src/auth/LoginDialog.cpp.o -MF CMakeFiles/Talkbox-client.dir/src/auth/LoginDialog.cpp.o.d -o CMakeFiles/Talkbox-client.dir/src/auth/LoginDialog.cpp.o -c /home/ltc/Program/Talkbox/Talkbox-client/src/auth/LoginDialog.cpp
 
-CMakeFiles/Talkbox-client.dir/src/apiclient.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Talkbox-client.dir/src/apiclient.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ltc/Program/Talkbox/Talkbox-client/src/apiclient.cpp > CMakeFiles/Talkbox-client.dir/src/apiclient.cpp.i
+CMakeFiles/Talkbox-client.dir/src/auth/LoginDialog.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Talkbox-client.dir/src/auth/LoginDialog.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ltc/Program/Talkbox/Talkbox-client/src/auth/LoginDialog.cpp > CMakeFiles/Talkbox-client.dir/src/auth/LoginDialog.cpp.i
 
-CMakeFiles/Talkbox-client.dir/src/apiclient.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Talkbox-client.dir/src/apiclient.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ltc/Program/Talkbox/Talkbox-client/src/apiclient.cpp -o CMakeFiles/Talkbox-client.dir/src/apiclient.cpp.s
+CMakeFiles/Talkbox-client.dir/src/auth/LoginDialog.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Talkbox-client.dir/src/auth/LoginDialog.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ltc/Program/Talkbox/Talkbox-client/src/auth/LoginDialog.cpp -o CMakeFiles/Talkbox-client.dir/src/auth/LoginDialog.cpp.s
 
-CMakeFiles/Talkbox-client.dir/src/appmanager.cpp.o: CMakeFiles/Talkbox-client.dir/flags.make
-CMakeFiles/Talkbox-client.dir/src/appmanager.cpp.o: /home/ltc/Program/Talkbox/Talkbox-client/src/appmanager.cpp
-CMakeFiles/Talkbox-client.dir/src/appmanager.cpp.o: CMakeFiles/Talkbox-client.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Talkbox-client.dir/src/appmanager.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Talkbox-client.dir/src/appmanager.cpp.o -MF CMakeFiles/Talkbox-client.dir/src/appmanager.cpp.o.d -o CMakeFiles/Talkbox-client.dir/src/appmanager.cpp.o -c /home/ltc/Program/Talkbox/Talkbox-client/src/appmanager.cpp
+CMakeFiles/Talkbox-client.dir/src/auth/RegisterDialog.cpp.o: CMakeFiles/Talkbox-client.dir/flags.make
+CMakeFiles/Talkbox-client.dir/src/auth/RegisterDialog.cpp.o: /home/ltc/Program/Talkbox/Talkbox-client/src/auth/RegisterDialog.cpp
+CMakeFiles/Talkbox-client.dir/src/auth/RegisterDialog.cpp.o: CMakeFiles/Talkbox-client.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Talkbox-client.dir/src/auth/RegisterDialog.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Talkbox-client.dir/src/auth/RegisterDialog.cpp.o -MF CMakeFiles/Talkbox-client.dir/src/auth/RegisterDialog.cpp.o.d -o CMakeFiles/Talkbox-client.dir/src/auth/RegisterDialog.cpp.o -c /home/ltc/Program/Talkbox/Talkbox-client/src/auth/RegisterDialog.cpp
 
-CMakeFiles/Talkbox-client.dir/src/appmanager.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Talkbox-client.dir/src/appmanager.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ltc/Program/Talkbox/Talkbox-client/src/appmanager.cpp > CMakeFiles/Talkbox-client.dir/src/appmanager.cpp.i
+CMakeFiles/Talkbox-client.dir/src/auth/RegisterDialog.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Talkbox-client.dir/src/auth/RegisterDialog.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ltc/Program/Talkbox/Talkbox-client/src/auth/RegisterDialog.cpp > CMakeFiles/Talkbox-client.dir/src/auth/RegisterDialog.cpp.i
 
-CMakeFiles/Talkbox-client.dir/src/appmanager.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Talkbox-client.dir/src/appmanager.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ltc/Program/Talkbox/Talkbox-client/src/appmanager.cpp -o CMakeFiles/Talkbox-client.dir/src/appmanager.cpp.s
+CMakeFiles/Talkbox-client.dir/src/auth/RegisterDialog.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Talkbox-client.dir/src/auth/RegisterDialog.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ltc/Program/Talkbox/Talkbox-client/src/auth/RegisterDialog.cpp -o CMakeFiles/Talkbox-client.dir/src/auth/RegisterDialog.cpp.s
 
-CMakeFiles/Talkbox-client.dir/src/auth/loginwidget.cpp.o: CMakeFiles/Talkbox-client.dir/flags.make
-CMakeFiles/Talkbox-client.dir/src/auth/loginwidget.cpp.o: /home/ltc/Program/Talkbox/Talkbox-client/src/auth/loginwidget.cpp
-CMakeFiles/Talkbox-client.dir/src/auth/loginwidget.cpp.o: CMakeFiles/Talkbox-client.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Talkbox-client.dir/src/auth/loginwidget.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Talkbox-client.dir/src/auth/loginwidget.cpp.o -MF CMakeFiles/Talkbox-client.dir/src/auth/loginwidget.cpp.o.d -o CMakeFiles/Talkbox-client.dir/src/auth/loginwidget.cpp.o -c /home/ltc/Program/Talkbox/Talkbox-client/src/auth/loginwidget.cpp
+CMakeFiles/Talkbox-client.dir/src/chat/ChatWindow.cpp.o: CMakeFiles/Talkbox-client.dir/flags.make
+CMakeFiles/Talkbox-client.dir/src/chat/ChatWindow.cpp.o: /home/ltc/Program/Talkbox/Talkbox-client/src/chat/ChatWindow.cpp
+CMakeFiles/Talkbox-client.dir/src/chat/ChatWindow.cpp.o: CMakeFiles/Talkbox-client.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Talkbox-client.dir/src/chat/ChatWindow.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Talkbox-client.dir/src/chat/ChatWindow.cpp.o -MF CMakeFiles/Talkbox-client.dir/src/chat/ChatWindow.cpp.o.d -o CMakeFiles/Talkbox-client.dir/src/chat/ChatWindow.cpp.o -c /home/ltc/Program/Talkbox/Talkbox-client/src/chat/ChatWindow.cpp
 
-CMakeFiles/Talkbox-client.dir/src/auth/loginwidget.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Talkbox-client.dir/src/auth/loginwidget.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ltc/Program/Talkbox/Talkbox-client/src/auth/loginwidget.cpp > CMakeFiles/Talkbox-client.dir/src/auth/loginwidget.cpp.i
+CMakeFiles/Talkbox-client.dir/src/chat/ChatWindow.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Talkbox-client.dir/src/chat/ChatWindow.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ltc/Program/Talkbox/Talkbox-client/src/chat/ChatWindow.cpp > CMakeFiles/Talkbox-client.dir/src/chat/ChatWindow.cpp.i
 
-CMakeFiles/Talkbox-client.dir/src/auth/loginwidget.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Talkbox-client.dir/src/auth/loginwidget.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ltc/Program/Talkbox/Talkbox-client/src/auth/loginwidget.cpp -o CMakeFiles/Talkbox-client.dir/src/auth/loginwidget.cpp.s
+CMakeFiles/Talkbox-client.dir/src/chat/ChatWindow.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Talkbox-client.dir/src/chat/ChatWindow.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ltc/Program/Talkbox/Talkbox-client/src/chat/ChatWindow.cpp -o CMakeFiles/Talkbox-client.dir/src/chat/ChatWindow.cpp.s
 
-CMakeFiles/Talkbox-client.dir/src/auth/registerwidget.cpp.o: CMakeFiles/Talkbox-client.dir/flags.make
-CMakeFiles/Talkbox-client.dir/src/auth/registerwidget.cpp.o: /home/ltc/Program/Talkbox/Talkbox-client/src/auth/registerwidget.cpp
-CMakeFiles/Talkbox-client.dir/src/auth/registerwidget.cpp.o: CMakeFiles/Talkbox-client.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Talkbox-client.dir/src/auth/registerwidget.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Talkbox-client.dir/src/auth/registerwidget.cpp.o -MF CMakeFiles/Talkbox-client.dir/src/auth/registerwidget.cpp.o.d -o CMakeFiles/Talkbox-client.dir/src/auth/registerwidget.cpp.o -c /home/ltc/Program/Talkbox/Talkbox-client/src/auth/registerwidget.cpp
+CMakeFiles/Talkbox-client.dir/src/chat/ContactList.cpp.o: CMakeFiles/Talkbox-client.dir/flags.make
+CMakeFiles/Talkbox-client.dir/src/chat/ContactList.cpp.o: /home/ltc/Program/Talkbox/Talkbox-client/src/chat/ContactList.cpp
+CMakeFiles/Talkbox-client.dir/src/chat/ContactList.cpp.o: CMakeFiles/Talkbox-client.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Talkbox-client.dir/src/chat/ContactList.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Talkbox-client.dir/src/chat/ContactList.cpp.o -MF CMakeFiles/Talkbox-client.dir/src/chat/ContactList.cpp.o.d -o CMakeFiles/Talkbox-client.dir/src/chat/ContactList.cpp.o -c /home/ltc/Program/Talkbox/Talkbox-client/src/chat/ContactList.cpp
 
-CMakeFiles/Talkbox-client.dir/src/auth/registerwidget.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Talkbox-client.dir/src/auth/registerwidget.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ltc/Program/Talkbox/Talkbox-client/src/auth/registerwidget.cpp > CMakeFiles/Talkbox-client.dir/src/auth/registerwidget.cpp.i
+CMakeFiles/Talkbox-client.dir/src/chat/ContactList.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Talkbox-client.dir/src/chat/ContactList.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ltc/Program/Talkbox/Talkbox-client/src/chat/ContactList.cpp > CMakeFiles/Talkbox-client.dir/src/chat/ContactList.cpp.i
 
-CMakeFiles/Talkbox-client.dir/src/auth/registerwidget.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Talkbox-client.dir/src/auth/registerwidget.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ltc/Program/Talkbox/Talkbox-client/src/auth/registerwidget.cpp -o CMakeFiles/Talkbox-client.dir/src/auth/registerwidget.cpp.s
+CMakeFiles/Talkbox-client.dir/src/chat/ContactList.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Talkbox-client.dir/src/chat/ContactList.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ltc/Program/Talkbox/Talkbox-client/src/chat/ContactList.cpp -o CMakeFiles/Talkbox-client.dir/src/chat/ContactList.cpp.s
 
-CMakeFiles/Talkbox-client.dir/src/chat/chatmainwidget.cpp.o: CMakeFiles/Talkbox-client.dir/flags.make
-CMakeFiles/Talkbox-client.dir/src/chat/chatmainwidget.cpp.o: /home/ltc/Program/Talkbox/Talkbox-client/src/chat/chatmainwidget.cpp
-CMakeFiles/Talkbox-client.dir/src/chat/chatmainwidget.cpp.o: CMakeFiles/Talkbox-client.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Talkbox-client.dir/src/chat/chatmainwidget.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Talkbox-client.dir/src/chat/chatmainwidget.cpp.o -MF CMakeFiles/Talkbox-client.dir/src/chat/chatmainwidget.cpp.o.d -o CMakeFiles/Talkbox-client.dir/src/chat/chatmainwidget.cpp.o -c /home/ltc/Program/Talkbox/Talkbox-client/src/chat/chatmainwidget.cpp
+CMakeFiles/Talkbox-client.dir/src/chat/GroupManager.cpp.o: CMakeFiles/Talkbox-client.dir/flags.make
+CMakeFiles/Talkbox-client.dir/src/chat/GroupManager.cpp.o: /home/ltc/Program/Talkbox/Talkbox-client/src/chat/GroupManager.cpp
+CMakeFiles/Talkbox-client.dir/src/chat/GroupManager.cpp.o: CMakeFiles/Talkbox-client.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/Talkbox-client.dir/src/chat/GroupManager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Talkbox-client.dir/src/chat/GroupManager.cpp.o -MF CMakeFiles/Talkbox-client.dir/src/chat/GroupManager.cpp.o.d -o CMakeFiles/Talkbox-client.dir/src/chat/GroupManager.cpp.o -c /home/ltc/Program/Talkbox/Talkbox-client/src/chat/GroupManager.cpp
 
-CMakeFiles/Talkbox-client.dir/src/chat/chatmainwidget.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Talkbox-client.dir/src/chat/chatmainwidget.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ltc/Program/Talkbox/Talkbox-client/src/chat/chatmainwidget.cpp > CMakeFiles/Talkbox-client.dir/src/chat/chatmainwidget.cpp.i
+CMakeFiles/Talkbox-client.dir/src/chat/GroupManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Talkbox-client.dir/src/chat/GroupManager.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ltc/Program/Talkbox/Talkbox-client/src/chat/GroupManager.cpp > CMakeFiles/Talkbox-client.dir/src/chat/GroupManager.cpp.i
 
-CMakeFiles/Talkbox-client.dir/src/chat/chatmainwidget.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Talkbox-client.dir/src/chat/chatmainwidget.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ltc/Program/Talkbox/Talkbox-client/src/chat/chatmainwidget.cpp -o CMakeFiles/Talkbox-client.dir/src/chat/chatmainwidget.cpp.s
+CMakeFiles/Talkbox-client.dir/src/chat/GroupManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Talkbox-client.dir/src/chat/GroupManager.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ltc/Program/Talkbox/Talkbox-client/src/chat/GroupManager.cpp -o CMakeFiles/Talkbox-client.dir/src/chat/GroupManager.cpp.s
 
-CMakeFiles/Talkbox-client.dir/src/forum/forummainwidget.cpp.o: CMakeFiles/Talkbox-client.dir/flags.make
-CMakeFiles/Talkbox-client.dir/src/forum/forummainwidget.cpp.o: /home/ltc/Program/Talkbox/Talkbox-client/src/forum/forummainwidget.cpp
-CMakeFiles/Talkbox-client.dir/src/forum/forummainwidget.cpp.o: CMakeFiles/Talkbox-client.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/Talkbox-client.dir/src/forum/forummainwidget.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Talkbox-client.dir/src/forum/forummainwidget.cpp.o -MF CMakeFiles/Talkbox-client.dir/src/forum/forummainwidget.cpp.o.d -o CMakeFiles/Talkbox-client.dir/src/forum/forummainwidget.cpp.o -c /home/ltc/Program/Talkbox/Talkbox-client/src/forum/forummainwidget.cpp
+CMakeFiles/Talkbox-client.dir/src/forum/ForumWidget.cpp.o: CMakeFiles/Talkbox-client.dir/flags.make
+CMakeFiles/Talkbox-client.dir/src/forum/ForumWidget.cpp.o: /home/ltc/Program/Talkbox/Talkbox-client/src/forum/ForumWidget.cpp
+CMakeFiles/Talkbox-client.dir/src/forum/ForumWidget.cpp.o: CMakeFiles/Talkbox-client.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/Talkbox-client.dir/src/forum/ForumWidget.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Talkbox-client.dir/src/forum/ForumWidget.cpp.o -MF CMakeFiles/Talkbox-client.dir/src/forum/ForumWidget.cpp.o.d -o CMakeFiles/Talkbox-client.dir/src/forum/ForumWidget.cpp.o -c /home/ltc/Program/Talkbox/Talkbox-client/src/forum/ForumWidget.cpp
 
-CMakeFiles/Talkbox-client.dir/src/forum/forummainwidget.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Talkbox-client.dir/src/forum/forummainwidget.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ltc/Program/Talkbox/Talkbox-client/src/forum/forummainwidget.cpp > CMakeFiles/Talkbox-client.dir/src/forum/forummainwidget.cpp.i
+CMakeFiles/Talkbox-client.dir/src/forum/ForumWidget.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Talkbox-client.dir/src/forum/ForumWidget.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ltc/Program/Talkbox/Talkbox-client/src/forum/ForumWidget.cpp > CMakeFiles/Talkbox-client.dir/src/forum/ForumWidget.cpp.i
 
-CMakeFiles/Talkbox-client.dir/src/forum/forummainwidget.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Talkbox-client.dir/src/forum/forummainwidget.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ltc/Program/Talkbox/Talkbox-client/src/forum/forummainwidget.cpp -o CMakeFiles/Talkbox-client.dir/src/forum/forummainwidget.cpp.s
+CMakeFiles/Talkbox-client.dir/src/forum/ForumWidget.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Talkbox-client.dir/src/forum/ForumWidget.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ltc/Program/Talkbox/Talkbox-client/src/forum/ForumWidget.cpp -o CMakeFiles/Talkbox-client.dir/src/forum/ForumWidget.cpp.s
+
+CMakeFiles/Talkbox-client.dir/src/forum/PostDetail.cpp.o: CMakeFiles/Talkbox-client.dir/flags.make
+CMakeFiles/Talkbox-client.dir/src/forum/PostDetail.cpp.o: /home/ltc/Program/Talkbox/Talkbox-client/src/forum/PostDetail.cpp
+CMakeFiles/Talkbox-client.dir/src/forum/PostDetail.cpp.o: CMakeFiles/Talkbox-client.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/Talkbox-client.dir/src/forum/PostDetail.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Talkbox-client.dir/src/forum/PostDetail.cpp.o -MF CMakeFiles/Talkbox-client.dir/src/forum/PostDetail.cpp.o.d -o CMakeFiles/Talkbox-client.dir/src/forum/PostDetail.cpp.o -c /home/ltc/Program/Talkbox/Talkbox-client/src/forum/PostDetail.cpp
+
+CMakeFiles/Talkbox-client.dir/src/forum/PostDetail.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Talkbox-client.dir/src/forum/PostDetail.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ltc/Program/Talkbox/Talkbox-client/src/forum/PostDetail.cpp > CMakeFiles/Talkbox-client.dir/src/forum/PostDetail.cpp.i
+
+CMakeFiles/Talkbox-client.dir/src/forum/PostDetail.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Talkbox-client.dir/src/forum/PostDetail.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ltc/Program/Talkbox/Talkbox-client/src/forum/PostDetail.cpp -o CMakeFiles/Talkbox-client.dir/src/forum/PostDetail.cpp.s
+
+CMakeFiles/Talkbox-client.dir/src/forum/CreatePost.cpp.o: CMakeFiles/Talkbox-client.dir/flags.make
+CMakeFiles/Talkbox-client.dir/src/forum/CreatePost.cpp.o: /home/ltc/Program/Talkbox/Talkbox-client/src/forum/CreatePost.cpp
+CMakeFiles/Talkbox-client.dir/src/forum/CreatePost.cpp.o: CMakeFiles/Talkbox-client.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/Talkbox-client.dir/src/forum/CreatePost.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Talkbox-client.dir/src/forum/CreatePost.cpp.o -MF CMakeFiles/Talkbox-client.dir/src/forum/CreatePost.cpp.o.d -o CMakeFiles/Talkbox-client.dir/src/forum/CreatePost.cpp.o -c /home/ltc/Program/Talkbox/Talkbox-client/src/forum/CreatePost.cpp
+
+CMakeFiles/Talkbox-client.dir/src/forum/CreatePost.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Talkbox-client.dir/src/forum/CreatePost.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ltc/Program/Talkbox/Talkbox-client/src/forum/CreatePost.cpp > CMakeFiles/Talkbox-client.dir/src/forum/CreatePost.cpp.i
+
+CMakeFiles/Talkbox-client.dir/src/forum/CreatePost.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Talkbox-client.dir/src/forum/CreatePost.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ltc/Program/Talkbox/Talkbox-client/src/forum/CreatePost.cpp -o CMakeFiles/Talkbox-client.dir/src/forum/CreatePost.cpp.s
+
+CMakeFiles/Talkbox-client.dir/src/common/HttpClient.cpp.o: CMakeFiles/Talkbox-client.dir/flags.make
+CMakeFiles/Talkbox-client.dir/src/common/HttpClient.cpp.o: /home/ltc/Program/Talkbox/Talkbox-client/src/common/HttpClient.cpp
+CMakeFiles/Talkbox-client.dir/src/common/HttpClient.cpp.o: CMakeFiles/Talkbox-client.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/Talkbox-client.dir/src/common/HttpClient.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Talkbox-client.dir/src/common/HttpClient.cpp.o -MF CMakeFiles/Talkbox-client.dir/src/common/HttpClient.cpp.o.d -o CMakeFiles/Talkbox-client.dir/src/common/HttpClient.cpp.o -c /home/ltc/Program/Talkbox/Talkbox-client/src/common/HttpClient.cpp
+
+CMakeFiles/Talkbox-client.dir/src/common/HttpClient.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Talkbox-client.dir/src/common/HttpClient.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ltc/Program/Talkbox/Talkbox-client/src/common/HttpClient.cpp > CMakeFiles/Talkbox-client.dir/src/common/HttpClient.cpp.i
+
+CMakeFiles/Talkbox-client.dir/src/common/HttpClient.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Talkbox-client.dir/src/common/HttpClient.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ltc/Program/Talkbox/Talkbox-client/src/common/HttpClient.cpp -o CMakeFiles/Talkbox-client.dir/src/common/HttpClient.cpp.s
 
 # Object files for target Talkbox-client
 Talkbox__client_OBJECTS = \
 "CMakeFiles/Talkbox-client.dir/Talkbox-client_autogen/mocs_compilation.cpp.o" \
 "CMakeFiles/Talkbox-client.dir/src/main.cpp.o" \
 "CMakeFiles/Talkbox-client.dir/src/mainwindow.cpp.o" \
-"CMakeFiles/Talkbox-client.dir/src/apiclient.cpp.o" \
-"CMakeFiles/Talkbox-client.dir/src/appmanager.cpp.o" \
-"CMakeFiles/Talkbox-client.dir/src/auth/loginwidget.cpp.o" \
-"CMakeFiles/Talkbox-client.dir/src/auth/registerwidget.cpp.o" \
-"CMakeFiles/Talkbox-client.dir/src/chat/chatmainwidget.cpp.o" \
-"CMakeFiles/Talkbox-client.dir/src/forum/forummainwidget.cpp.o"
+"CMakeFiles/Talkbox-client.dir/src/auth/LoginDialog.cpp.o" \
+"CMakeFiles/Talkbox-client.dir/src/auth/RegisterDialog.cpp.o" \
+"CMakeFiles/Talkbox-client.dir/src/chat/ChatWindow.cpp.o" \
+"CMakeFiles/Talkbox-client.dir/src/chat/ContactList.cpp.o" \
+"CMakeFiles/Talkbox-client.dir/src/chat/GroupManager.cpp.o" \
+"CMakeFiles/Talkbox-client.dir/src/forum/ForumWidget.cpp.o" \
+"CMakeFiles/Talkbox-client.dir/src/forum/PostDetail.cpp.o" \
+"CMakeFiles/Talkbox-client.dir/src/forum/CreatePost.cpp.o" \
+"CMakeFiles/Talkbox-client.dir/src/common/HttpClient.cpp.o"
 
 # External object files for target Talkbox-client
 Talkbox__client_EXTERNAL_OBJECTS =
@@ -216,12 +268,15 @@ Talkbox__client_EXTERNAL_OBJECTS =
 Talkbox-client: CMakeFiles/Talkbox-client.dir/Talkbox-client_autogen/mocs_compilation.cpp.o
 Talkbox-client: CMakeFiles/Talkbox-client.dir/src/main.cpp.o
 Talkbox-client: CMakeFiles/Talkbox-client.dir/src/mainwindow.cpp.o
-Talkbox-client: CMakeFiles/Talkbox-client.dir/src/apiclient.cpp.o
-Talkbox-client: CMakeFiles/Talkbox-client.dir/src/appmanager.cpp.o
-Talkbox-client: CMakeFiles/Talkbox-client.dir/src/auth/loginwidget.cpp.o
-Talkbox-client: CMakeFiles/Talkbox-client.dir/src/auth/registerwidget.cpp.o
-Talkbox-client: CMakeFiles/Talkbox-client.dir/src/chat/chatmainwidget.cpp.o
-Talkbox-client: CMakeFiles/Talkbox-client.dir/src/forum/forummainwidget.cpp.o
+Talkbox-client: CMakeFiles/Talkbox-client.dir/src/auth/LoginDialog.cpp.o
+Talkbox-client: CMakeFiles/Talkbox-client.dir/src/auth/RegisterDialog.cpp.o
+Talkbox-client: CMakeFiles/Talkbox-client.dir/src/chat/ChatWindow.cpp.o
+Talkbox-client: CMakeFiles/Talkbox-client.dir/src/chat/ContactList.cpp.o
+Talkbox-client: CMakeFiles/Talkbox-client.dir/src/chat/GroupManager.cpp.o
+Talkbox-client: CMakeFiles/Talkbox-client.dir/src/forum/ForumWidget.cpp.o
+Talkbox-client: CMakeFiles/Talkbox-client.dir/src/forum/PostDetail.cpp.o
+Talkbox-client: CMakeFiles/Talkbox-client.dir/src/forum/CreatePost.cpp.o
+Talkbox-client: CMakeFiles/Talkbox-client.dir/src/common/HttpClient.cpp.o
 Talkbox-client: CMakeFiles/Talkbox-client.dir/build.make
 Talkbox-client: CMakeFiles/Talkbox-client.dir/compiler_depend.ts
 Talkbox-client: /usr/lib/libQt6Widgets.so.6.9.1
@@ -231,7 +286,7 @@ Talkbox-client: /usr/lib/libGLX.so
 Talkbox-client: /usr/lib/libOpenGL.so
 Talkbox-client: /usr/lib/libQt6Core.so.6.9.1
 Talkbox-client: CMakeFiles/Talkbox-client.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable Talkbox-client"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable Talkbox-client"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Talkbox-client.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -242,7 +297,7 @@ CMakeFiles/Talkbox-client.dir/clean:
 	$(CMAKE_COMMAND) -P CMakeFiles/Talkbox-client.dir/cmake_clean.cmake
 .PHONY : CMakeFiles/Talkbox-client.dir/clean
 
-CMakeFiles/Talkbox-client.dir/depend:
+CMakeFiles/Talkbox-client.dir/depend: Talkbox-client_autogen/timestamp
 	cd /home/ltc/Program/Talkbox/Talkbox-client/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ltc/Program/Talkbox/Talkbox-client /home/ltc/Program/Talkbox/Talkbox-client /home/ltc/Program/Talkbox/Talkbox-client/build /home/ltc/Program/Talkbox/Talkbox-client/build /home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles/Talkbox-client.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/Talkbox-client.dir/depend
 

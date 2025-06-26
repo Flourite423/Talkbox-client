@@ -503,7 +503,6 @@
 		"/usr/lib/cmake/Qt6Network/Qt6QTlsBackendOpenSSLPluginTargets-relwithdebinfo.cmake",
 		"/usr/lib/cmake/Qt6Network/Qt6QTlsBackendOpenSSLPluginAdditionalTargetInfo.cmake",
 		"/usr/lib/cmake/Qt6Network/Qt6NetworkVersionlessAliasTargets.cmake",
-		"/usr/share/cmake/Modules/GNUInstallDirs.cmake",
 		"/usr/share/cmake/Modules/GNUInstallDirs.cmake"
 	],
 	"CMAKE_SOURCE_DIR" : "/home/ltc/Program/Talkbox/Talkbox-client",
@@ -513,39 +512,57 @@
 	"HEADERS" : 
 	[
 		[
-			"/home/ltc/Program/Talkbox/Talkbox-client/src/apiclient.h",
+			"/home/ltc/Program/Talkbox/Talkbox-client/src/auth/LoginDialog.h",
 			"MU",
-			"UVLADIE3JM/moc_apiclient.cpp",
+			"QMBYO36SBA/moc_LoginDialog.cpp",
 			null
 		],
 		[
-			"/home/ltc/Program/Talkbox/Talkbox-client/src/appmanager.h",
+			"/home/ltc/Program/Talkbox/Talkbox-client/src/auth/RegisterDialog.h",
 			"MU",
-			"UVLADIE3JM/moc_appmanager.cpp",
+			"QMBYO36SBA/moc_RegisterDialog.cpp",
 			null
 		],
 		[
-			"/home/ltc/Program/Talkbox/Talkbox-client/src/auth/loginwidget.h",
+			"/home/ltc/Program/Talkbox/Talkbox-client/src/chat/ChatWindow.h",
 			"MU",
-			"QMBYO36SBA/moc_loginwidget.cpp",
+			"O5MXRAE5KY/moc_ChatWindow.cpp",
 			null
 		],
 		[
-			"/home/ltc/Program/Talkbox/Talkbox-client/src/auth/registerwidget.h",
+			"/home/ltc/Program/Talkbox/Talkbox-client/src/chat/ContactList.h",
 			"MU",
-			"QMBYO36SBA/moc_registerwidget.cpp",
+			"O5MXRAE5KY/moc_ContactList.cpp",
 			null
 		],
 		[
-			"/home/ltc/Program/Talkbox/Talkbox-client/src/chat/chatmainwidget.h",
+			"/home/ltc/Program/Talkbox/Talkbox-client/src/chat/GroupManager.h",
 			"MU",
-			"O5MXRAE5KY/moc_chatmainwidget.cpp",
+			"O5MXRAE5KY/moc_GroupManager.cpp",
 			null
 		],
 		[
-			"/home/ltc/Program/Talkbox/Talkbox-client/src/forum/forummainwidget.h",
+			"/home/ltc/Program/Talkbox/Talkbox-client/src/common/HttpClient.h",
 			"MU",
-			"GGFZP522KP/moc_forummainwidget.cpp",
+			"2PZEZPHIBF/moc_HttpClient.cpp",
+			null
+		],
+		[
+			"/home/ltc/Program/Talkbox/Talkbox-client/src/forum/CreatePost.h",
+			"MU",
+			"GGFZP522KP/moc_CreatePost.cpp",
+			null
+		],
+		[
+			"/home/ltc/Program/Talkbox/Talkbox-client/src/forum/ForumWidget.h",
+			"MU",
+			"GGFZP522KP/moc_ForumWidget.cpp",
+			null
+		],
+		[
+			"/home/ltc/Program/Talkbox/Talkbox-client/src/forum/PostDetail.h",
+			"MU",
+			"GGFZP522KP/moc_PostDetail.cpp",
 			null
 		],
 		[
@@ -558,14 +575,7 @@
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
 	"INCLUDE_DIR" : "/home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/include",
 	"MOC_COMPILATION_FILE" : "/home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/mocs_compilation.cpp",
-	"MOC_DEFINITIONS" : 
-	[
-		"QT_CORE_LIB",
-		"QT_GUI_LIB",
-		"QT_NETWORK_LIB",
-		"QT_NO_DEBUG",
-		"QT_WIDGETS_LIB"
-	],
+	"MOC_DEFINITIONS" : [ "QT_CORE_LIB", "QT_GUI_LIB", "QT_NETWORK_LIB", "QT_WIDGETS_LIB" ],
 	"MOC_DEPEND_FILTERS" : 
 	[
 		[
@@ -575,6 +585,11 @@
 	],
 	"MOC_INCLUDES" : 
 	[
+		"/home/ltc/Program/Talkbox/Talkbox-client/src",
+		"/home/ltc/Program/Talkbox/Talkbox-client/src/auth",
+		"/home/ltc/Program/Talkbox/Talkbox-client/src/chat",
+		"/home/ltc/Program/Talkbox/Talkbox-client/src/forum",
+		"/home/ltc/Program/Talkbox/Talkbox-client/src/common",
 		"/usr/include/qt6/QtCore",
 		"/usr/include/qt6",
 		"/usr/lib/qt6/mkspecs/linux-g++",
@@ -603,6 +618,7 @@
 	"MOC_PREDEFS_CMD" : 
 	[
 		"/usr/bin/c++",
+		"-std=gnu++17",
 		"-w",
 		"-dM",
 		"-E",
@@ -622,32 +638,47 @@
 	"SOURCES" : 
 	[
 		[
-			"/home/ltc/Program/Talkbox/Talkbox-client/src/apiclient.cpp",
+			"/home/ltc/Program/Talkbox/Talkbox-client/src/auth/LoginDialog.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/ltc/Program/Talkbox/Talkbox-client/src/appmanager.cpp",
+			"/home/ltc/Program/Talkbox/Talkbox-client/src/auth/RegisterDialog.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/ltc/Program/Talkbox/Talkbox-client/src/auth/loginwidget.cpp",
+			"/home/ltc/Program/Talkbox/Talkbox-client/src/chat/ChatWindow.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/ltc/Program/Talkbox/Talkbox-client/src/auth/registerwidget.cpp",
+			"/home/ltc/Program/Talkbox/Talkbox-client/src/chat/ContactList.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/ltc/Program/Talkbox/Talkbox-client/src/chat/chatmainwidget.cpp",
+			"/home/ltc/Program/Talkbox/Talkbox-client/src/chat/GroupManager.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/ltc/Program/Talkbox/Talkbox-client/src/forum/forummainwidget.cpp",
+			"/home/ltc/Program/Talkbox/Talkbox-client/src/common/HttpClient.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/ltc/Program/Talkbox/Talkbox-client/src/forum/CreatePost.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/ltc/Program/Talkbox/Talkbox-client/src/forum/ForumWidget.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/ltc/Program/Talkbox/Talkbox-client/src/forum/PostDetail.cpp",
 			"MU",
 			null
 		],

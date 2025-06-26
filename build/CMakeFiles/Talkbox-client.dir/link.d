@@ -5,12 +5,15 @@ Talkbox-client: \
   CMakeFiles/Talkbox-client.dir/Talkbox-client_autogen/mocs_compilation.cpp.o \
   CMakeFiles/Talkbox-client.dir/src/main.cpp.o \
   CMakeFiles/Talkbox-client.dir/src/mainwindow.cpp.o \
-  CMakeFiles/Talkbox-client.dir/src/apiclient.cpp.o \
-  CMakeFiles/Talkbox-client.dir/src/appmanager.cpp.o \
-  CMakeFiles/Talkbox-client.dir/src/auth/loginwidget.cpp.o \
-  CMakeFiles/Talkbox-client.dir/src/auth/registerwidget.cpp.o \
-  CMakeFiles/Talkbox-client.dir/src/chat/chatmainwidget.cpp.o \
-  CMakeFiles/Talkbox-client.dir/src/forum/forummainwidget.cpp.o \
+  CMakeFiles/Talkbox-client.dir/src/auth/LoginDialog.cpp.o \
+  CMakeFiles/Talkbox-client.dir/src/auth/RegisterDialog.cpp.o \
+  CMakeFiles/Talkbox-client.dir/src/chat/ChatWindow.cpp.o \
+  CMakeFiles/Talkbox-client.dir/src/chat/ContactList.cpp.o \
+  CMakeFiles/Talkbox-client.dir/src/chat/GroupManager.cpp.o \
+  CMakeFiles/Talkbox-client.dir/src/forum/ForumWidget.cpp.o \
+  CMakeFiles/Talkbox-client.dir/src/forum/PostDetail.cpp.o \
+  CMakeFiles/Talkbox-client.dir/src/forum/CreatePost.cpp.o \
+  CMakeFiles/Talkbox-client.dir/src/common/HttpClient.cpp.o \
   /usr/lib/libQt6Widgets.so.6.9.1 \
   /usr/lib/libQt6Network.so.6.9.1 \
   /usr/lib/libQt6Gui.so.6.9.1 \
@@ -147,17 +150,23 @@ CMakeFiles/Talkbox-client.dir/src/main.cpp.o:
 
 CMakeFiles/Talkbox-client.dir/src/mainwindow.cpp.o:
 
-CMakeFiles/Talkbox-client.dir/src/apiclient.cpp.o:
+CMakeFiles/Talkbox-client.dir/src/auth/LoginDialog.cpp.o:
 
-CMakeFiles/Talkbox-client.dir/src/appmanager.cpp.o:
+CMakeFiles/Talkbox-client.dir/src/auth/RegisterDialog.cpp.o:
 
-CMakeFiles/Talkbox-client.dir/src/auth/loginwidget.cpp.o:
+CMakeFiles/Talkbox-client.dir/src/chat/ChatWindow.cpp.o:
 
-CMakeFiles/Talkbox-client.dir/src/auth/registerwidget.cpp.o:
+CMakeFiles/Talkbox-client.dir/src/chat/ContactList.cpp.o:
 
-CMakeFiles/Talkbox-client.dir/src/chat/chatmainwidget.cpp.o:
+CMakeFiles/Talkbox-client.dir/src/chat/GroupManager.cpp.o:
 
-CMakeFiles/Talkbox-client.dir/src/forum/forummainwidget.cpp.o:
+CMakeFiles/Talkbox-client.dir/src/forum/ForumWidget.cpp.o:
+
+CMakeFiles/Talkbox-client.dir/src/forum/PostDetail.cpp.o:
+
+CMakeFiles/Talkbox-client.dir/src/forum/CreatePost.cpp.o:
+
+CMakeFiles/Talkbox-client.dir/src/common/HttpClient.cpp.o:
 
 /usr/lib/libQt6Widgets.so.6.9.1:
 

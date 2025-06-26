@@ -8,13 +8,17 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "" "Talkbox-client_autogen/timestamp" "custom" "Talkbox-client_autogen/deps"
   "/home/ltc/Program/Talkbox/Talkbox-client/build/Talkbox-client_autogen/mocs_compilation.cpp" "CMakeFiles/Talkbox-client.dir/Talkbox-client_autogen/mocs_compilation.cpp.o" "gcc" "CMakeFiles/Talkbox-client.dir/Talkbox-client_autogen/mocs_compilation.cpp.o.d"
-  "/home/ltc/Program/Talkbox/Talkbox-client/src/apiclient.cpp" "CMakeFiles/Talkbox-client.dir/src/apiclient.cpp.o" "gcc" "CMakeFiles/Talkbox-client.dir/src/apiclient.cpp.o.d"
-  "/home/ltc/Program/Talkbox/Talkbox-client/src/appmanager.cpp" "CMakeFiles/Talkbox-client.dir/src/appmanager.cpp.o" "gcc" "CMakeFiles/Talkbox-client.dir/src/appmanager.cpp.o.d"
-  "/home/ltc/Program/Talkbox/Talkbox-client/src/auth/loginwidget.cpp" "CMakeFiles/Talkbox-client.dir/src/auth/loginwidget.cpp.o" "gcc" "CMakeFiles/Talkbox-client.dir/src/auth/loginwidget.cpp.o.d"
-  "/home/ltc/Program/Talkbox/Talkbox-client/src/auth/registerwidget.cpp" "CMakeFiles/Talkbox-client.dir/src/auth/registerwidget.cpp.o" "gcc" "CMakeFiles/Talkbox-client.dir/src/auth/registerwidget.cpp.o.d"
-  "/home/ltc/Program/Talkbox/Talkbox-client/src/chat/chatmainwidget.cpp" "CMakeFiles/Talkbox-client.dir/src/chat/chatmainwidget.cpp.o" "gcc" "CMakeFiles/Talkbox-client.dir/src/chat/chatmainwidget.cpp.o.d"
-  "/home/ltc/Program/Talkbox/Talkbox-client/src/forum/forummainwidget.cpp" "CMakeFiles/Talkbox-client.dir/src/forum/forummainwidget.cpp.o" "gcc" "CMakeFiles/Talkbox-client.dir/src/forum/forummainwidget.cpp.o.d"
+  "/home/ltc/Program/Talkbox/Talkbox-client/src/auth/LoginDialog.cpp" "CMakeFiles/Talkbox-client.dir/src/auth/LoginDialog.cpp.o" "gcc" "CMakeFiles/Talkbox-client.dir/src/auth/LoginDialog.cpp.o.d"
+  "/home/ltc/Program/Talkbox/Talkbox-client/src/auth/RegisterDialog.cpp" "CMakeFiles/Talkbox-client.dir/src/auth/RegisterDialog.cpp.o" "gcc" "CMakeFiles/Talkbox-client.dir/src/auth/RegisterDialog.cpp.o.d"
+  "/home/ltc/Program/Talkbox/Talkbox-client/src/chat/ChatWindow.cpp" "CMakeFiles/Talkbox-client.dir/src/chat/ChatWindow.cpp.o" "gcc" "CMakeFiles/Talkbox-client.dir/src/chat/ChatWindow.cpp.o.d"
+  "/home/ltc/Program/Talkbox/Talkbox-client/src/chat/ContactList.cpp" "CMakeFiles/Talkbox-client.dir/src/chat/ContactList.cpp.o" "gcc" "CMakeFiles/Talkbox-client.dir/src/chat/ContactList.cpp.o.d"
+  "/home/ltc/Program/Talkbox/Talkbox-client/src/chat/GroupManager.cpp" "CMakeFiles/Talkbox-client.dir/src/chat/GroupManager.cpp.o" "gcc" "CMakeFiles/Talkbox-client.dir/src/chat/GroupManager.cpp.o.d"
+  "/home/ltc/Program/Talkbox/Talkbox-client/src/common/HttpClient.cpp" "CMakeFiles/Talkbox-client.dir/src/common/HttpClient.cpp.o" "gcc" "CMakeFiles/Talkbox-client.dir/src/common/HttpClient.cpp.o.d"
+  "/home/ltc/Program/Talkbox/Talkbox-client/src/forum/CreatePost.cpp" "CMakeFiles/Talkbox-client.dir/src/forum/CreatePost.cpp.o" "gcc" "CMakeFiles/Talkbox-client.dir/src/forum/CreatePost.cpp.o.d"
+  "/home/ltc/Program/Talkbox/Talkbox-client/src/forum/ForumWidget.cpp" "CMakeFiles/Talkbox-client.dir/src/forum/ForumWidget.cpp.o" "gcc" "CMakeFiles/Talkbox-client.dir/src/forum/ForumWidget.cpp.o.d"
+  "/home/ltc/Program/Talkbox/Talkbox-client/src/forum/PostDetail.cpp" "CMakeFiles/Talkbox-client.dir/src/forum/PostDetail.cpp.o" "gcc" "CMakeFiles/Talkbox-client.dir/src/forum/PostDetail.cpp.o.d"
   "/home/ltc/Program/Talkbox/Talkbox-client/src/main.cpp" "CMakeFiles/Talkbox-client.dir/src/main.cpp.o" "gcc" "CMakeFiles/Talkbox-client.dir/src/main.cpp.o.d"
   "/home/ltc/Program/Talkbox/Talkbox-client/src/mainwindow.cpp" "CMakeFiles/Talkbox-client.dir/src/mainwindow.cpp.o" "gcc" "CMakeFiles/Talkbox-client.dir/src/mainwindow.cpp.o.d"
   "" "Talkbox-client" "gcc" "CMakeFiles/Talkbox-client.dir/link.d"

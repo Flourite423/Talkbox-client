@@ -6,84 +6,79 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1200</width>
+    <height>800</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Talkbox</string>
-  </property>
-  <property name="styleSheet">
-   <string>QMainWindow {
-    background-color: #f5f5f5;
-    font-family: 'Microsoft YaHei', Arial, sans-serif;
-}
-
-QMenuBar {
-    background-color: #007acc;
-    color: white;
-    border: none;
-}
-
-QMenuBar::item {
-    background: transparent;
-    padding: 8px 16px;
-}
-
-QMenuBar::item:selected {
-    background-color: #005999;
-}
-
-QStatusBar {
-    background-color: #333;
-    color: white;
-}</string>
+   <string>Talkbox - 聊天软件</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="centralLayout">
+   <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QTabWidget" name="mainTabWidget">
+     <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
        <number>0</number>
-      </property>
-      <property name="styleSheet">
-       <string>QTabWidget::pane {
-    border: 1px solid #ddd;
-    background-color: white;
-}
-
-QTabBar::tab {
-    background-color: #e9ecef;
-    padding: 8px 16px;
-    margin-right: 2px;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-}
-
-QTabBar::tab:selected {
-    background-color: #007acc;
-    color: white;
-}
-
-QTabBar::tab:hover {
-    background-color: #0056b3;
-    color: white;
-}</string>
       </property>
       <widget class="QWidget" name="chatTab">
        <attribute name="title">
         <string>聊天</string>
        </attribute>
+       <layout class="QHBoxLayout" name="chatLayout">
+        <item>
+         <widget class="QWidget" name="contactWidget" native="true">
+          <property name="maximumSize">
+           <size>
+            <width>300</width>
+            <height>16777215</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QWidget" name="chatWidget" native="true"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="groupTab">
+       <attribute name="title">
+        <string>群组</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="groupLayout">
+        <item>
+         <widget class="QWidget" name="groupManagerWidget" native="true">
+          <property name="maximumSize">
+           <size>
+            <width>400</width>
+            <height>16777215</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QWidget" name="groupChatWidget" native="true"/>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="forumTab">
        <attribute name="title">
         <string>论坛</string>
        </attribute>
-      </widget>
-      <widget class="QWidget" name="settingsTab">
-       <attribute name="title">
-        <string>设置</string>
-       </attribute>
+       <layout class="QHBoxLayout" name="forumLayout">
+        <item>
+         <widget class="QWidget" name="forumListWidget" native="true">
+          <property name="maximumSize">
+           <size>
+            <width>400</width>
+            <height>16777215</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QWidget" name="forumDetailWidget" native="true"/>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
@@ -94,30 +89,15 @@ QTabBar::tab:hover {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1200</width>
      <height>31</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuFile">
+   <widget class="QMenu" name="menuUser">
     <property name="title">
-     <string>文件</string>
+     <string>用户</string>
     </property>
-    <addaction name="actionLogin"/>
     <addaction name="actionLogout"/>
-    <addaction name="separator"/>
-    <addaction name="actionExit"/>
-   </widget>
-   <widget class="QMenu" name="menuEdit">
-    <property name="title">
-     <string>编辑</string>
-    </property>
-    <addaction name="actionPreferences"/>
-   </widget>
-   <widget class="QMenu" name="menuView">
-    <property name="title">
-     <string>视图</string>
-    </property>
-    <addaction name="actionFullscreen"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -125,35 +105,19 @@ QTabBar::tab:hover {
     </property>
     <addaction name="actionAbout"/>
    </widget>
-   <addaction name="menuFile"/>
-   <addaction name="menuEdit"/>
-   <addaction name="menuView"/>
+   <addaction name="menuUser"/>
    <addaction name="menuHelp"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionLogin">
-   <property name="text">
-    <string>登录</string>
-   </property>
-  </action>
+  <widget class="QStatusBar" name="statusbar">
+   <widget class="QLabel" name="userLabel">
+    <property name="text">
+     <string>未登录</string>
+    </property>
+   </widget>
+  </widget>
   <action name="actionLogout">
    <property name="text">
-    <string>退出登录</string>
-   </property>
-  </action>
-  <action name="actionExit">
-   <property name="text">
-    <string>退出</string>
-   </property>
-  </action>
-  <action name="actionPreferences">
-   <property name="text">
-    <string>首选项</string>
-   </property>
-  </action>
-  <action name="actionFullscreen">
-   <property name="text">
-    <string>全屏</string>
+    <string>登出</string>
    </property>
   </action>
   <action name="actionAbout">

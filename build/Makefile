@@ -85,51 +85,6 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
 
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-.PHONY : list_install_components/fast
-
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install
-
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install/fast
-
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local/fast
-
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip/fast
-
 # The main all target
 all: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles /home/ltc/Program/Talkbox/Talkbox-client/build//CMakeFiles/progress.marks
@@ -173,6 +128,32 @@ Talkbox-client: cmake_check_build_system
 Talkbox-client/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/build
 .PHONY : Talkbox-client/fast
+
+#=============================================================================
+# Target rules for targets named run
+
+# Build rule for target.
+run: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 run
+.PHONY : run
+
+# fast build rule for target.
+run/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/build
+.PHONY : run/fast
+
+#=============================================================================
+# Target rules for targets named clean-all
+
+# Build rule for target.
+clean-all: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 clean-all
+.PHONY : clean-all
+
+# fast build rule for target.
+clean-all/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clean-all.dir/build.make CMakeFiles/clean-all.dir/build
+.PHONY : clean-all/fast
 
 #=============================================================================
 # Target rules for targets named Talkbox-client_autogen_timestamp_deps
@@ -224,149 +205,221 @@ Talkbox-client_autogen/mocs_compilation.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/Talkbox-client_autogen/mocs_compilation.cpp.s
 .PHONY : Talkbox-client_autogen/mocs_compilation.cpp.s
 
-src/apiclient.o: src/apiclient.cpp.o
-.PHONY : src/apiclient.o
+src/auth/LoginDialog.o: src/auth/LoginDialog.cpp.o
+.PHONY : src/auth/LoginDialog.o
 
 # target to build an object file
-src/apiclient.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/apiclient.cpp.o
-.PHONY : src/apiclient.cpp.o
+src/auth/LoginDialog.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/auth/LoginDialog.cpp.o
+.PHONY : src/auth/LoginDialog.cpp.o
 
-src/apiclient.i: src/apiclient.cpp.i
-.PHONY : src/apiclient.i
+src/auth/LoginDialog.i: src/auth/LoginDialog.cpp.i
+.PHONY : src/auth/LoginDialog.i
 
 # target to preprocess a source file
-src/apiclient.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/apiclient.cpp.i
-.PHONY : src/apiclient.cpp.i
+src/auth/LoginDialog.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/auth/LoginDialog.cpp.i
+.PHONY : src/auth/LoginDialog.cpp.i
 
-src/apiclient.s: src/apiclient.cpp.s
-.PHONY : src/apiclient.s
+src/auth/LoginDialog.s: src/auth/LoginDialog.cpp.s
+.PHONY : src/auth/LoginDialog.s
 
 # target to generate assembly for a file
-src/apiclient.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/apiclient.cpp.s
-.PHONY : src/apiclient.cpp.s
+src/auth/LoginDialog.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/auth/LoginDialog.cpp.s
+.PHONY : src/auth/LoginDialog.cpp.s
 
-src/appmanager.o: src/appmanager.cpp.o
-.PHONY : src/appmanager.o
+src/auth/RegisterDialog.o: src/auth/RegisterDialog.cpp.o
+.PHONY : src/auth/RegisterDialog.o
 
 # target to build an object file
-src/appmanager.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/appmanager.cpp.o
-.PHONY : src/appmanager.cpp.o
+src/auth/RegisterDialog.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/auth/RegisterDialog.cpp.o
+.PHONY : src/auth/RegisterDialog.cpp.o
 
-src/appmanager.i: src/appmanager.cpp.i
-.PHONY : src/appmanager.i
+src/auth/RegisterDialog.i: src/auth/RegisterDialog.cpp.i
+.PHONY : src/auth/RegisterDialog.i
 
 # target to preprocess a source file
-src/appmanager.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/appmanager.cpp.i
-.PHONY : src/appmanager.cpp.i
+src/auth/RegisterDialog.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/auth/RegisterDialog.cpp.i
+.PHONY : src/auth/RegisterDialog.cpp.i
 
-src/appmanager.s: src/appmanager.cpp.s
-.PHONY : src/appmanager.s
+src/auth/RegisterDialog.s: src/auth/RegisterDialog.cpp.s
+.PHONY : src/auth/RegisterDialog.s
 
 # target to generate assembly for a file
-src/appmanager.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/appmanager.cpp.s
-.PHONY : src/appmanager.cpp.s
+src/auth/RegisterDialog.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/auth/RegisterDialog.cpp.s
+.PHONY : src/auth/RegisterDialog.cpp.s
 
-src/auth/loginwidget.o: src/auth/loginwidget.cpp.o
-.PHONY : src/auth/loginwidget.o
+src/chat/ChatWindow.o: src/chat/ChatWindow.cpp.o
+.PHONY : src/chat/ChatWindow.o
 
 # target to build an object file
-src/auth/loginwidget.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/auth/loginwidget.cpp.o
-.PHONY : src/auth/loginwidget.cpp.o
+src/chat/ChatWindow.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/chat/ChatWindow.cpp.o
+.PHONY : src/chat/ChatWindow.cpp.o
 
-src/auth/loginwidget.i: src/auth/loginwidget.cpp.i
-.PHONY : src/auth/loginwidget.i
+src/chat/ChatWindow.i: src/chat/ChatWindow.cpp.i
+.PHONY : src/chat/ChatWindow.i
 
 # target to preprocess a source file
-src/auth/loginwidget.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/auth/loginwidget.cpp.i
-.PHONY : src/auth/loginwidget.cpp.i
+src/chat/ChatWindow.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/chat/ChatWindow.cpp.i
+.PHONY : src/chat/ChatWindow.cpp.i
 
-src/auth/loginwidget.s: src/auth/loginwidget.cpp.s
-.PHONY : src/auth/loginwidget.s
+src/chat/ChatWindow.s: src/chat/ChatWindow.cpp.s
+.PHONY : src/chat/ChatWindow.s
 
 # target to generate assembly for a file
-src/auth/loginwidget.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/auth/loginwidget.cpp.s
-.PHONY : src/auth/loginwidget.cpp.s
+src/chat/ChatWindow.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/chat/ChatWindow.cpp.s
+.PHONY : src/chat/ChatWindow.cpp.s
 
-src/auth/registerwidget.o: src/auth/registerwidget.cpp.o
-.PHONY : src/auth/registerwidget.o
+src/chat/ContactList.o: src/chat/ContactList.cpp.o
+.PHONY : src/chat/ContactList.o
 
 # target to build an object file
-src/auth/registerwidget.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/auth/registerwidget.cpp.o
-.PHONY : src/auth/registerwidget.cpp.o
+src/chat/ContactList.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/chat/ContactList.cpp.o
+.PHONY : src/chat/ContactList.cpp.o
 
-src/auth/registerwidget.i: src/auth/registerwidget.cpp.i
-.PHONY : src/auth/registerwidget.i
+src/chat/ContactList.i: src/chat/ContactList.cpp.i
+.PHONY : src/chat/ContactList.i
 
 # target to preprocess a source file
-src/auth/registerwidget.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/auth/registerwidget.cpp.i
-.PHONY : src/auth/registerwidget.cpp.i
+src/chat/ContactList.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/chat/ContactList.cpp.i
+.PHONY : src/chat/ContactList.cpp.i
 
-src/auth/registerwidget.s: src/auth/registerwidget.cpp.s
-.PHONY : src/auth/registerwidget.s
+src/chat/ContactList.s: src/chat/ContactList.cpp.s
+.PHONY : src/chat/ContactList.s
 
 # target to generate assembly for a file
-src/auth/registerwidget.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/auth/registerwidget.cpp.s
-.PHONY : src/auth/registerwidget.cpp.s
+src/chat/ContactList.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/chat/ContactList.cpp.s
+.PHONY : src/chat/ContactList.cpp.s
 
-src/chat/chatmainwidget.o: src/chat/chatmainwidget.cpp.o
-.PHONY : src/chat/chatmainwidget.o
+src/chat/GroupManager.o: src/chat/GroupManager.cpp.o
+.PHONY : src/chat/GroupManager.o
 
 # target to build an object file
-src/chat/chatmainwidget.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/chat/chatmainwidget.cpp.o
-.PHONY : src/chat/chatmainwidget.cpp.o
+src/chat/GroupManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/chat/GroupManager.cpp.o
+.PHONY : src/chat/GroupManager.cpp.o
 
-src/chat/chatmainwidget.i: src/chat/chatmainwidget.cpp.i
-.PHONY : src/chat/chatmainwidget.i
+src/chat/GroupManager.i: src/chat/GroupManager.cpp.i
+.PHONY : src/chat/GroupManager.i
 
 # target to preprocess a source file
-src/chat/chatmainwidget.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/chat/chatmainwidget.cpp.i
-.PHONY : src/chat/chatmainwidget.cpp.i
+src/chat/GroupManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/chat/GroupManager.cpp.i
+.PHONY : src/chat/GroupManager.cpp.i
 
-src/chat/chatmainwidget.s: src/chat/chatmainwidget.cpp.s
-.PHONY : src/chat/chatmainwidget.s
+src/chat/GroupManager.s: src/chat/GroupManager.cpp.s
+.PHONY : src/chat/GroupManager.s
 
 # target to generate assembly for a file
-src/chat/chatmainwidget.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/chat/chatmainwidget.cpp.s
-.PHONY : src/chat/chatmainwidget.cpp.s
+src/chat/GroupManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/chat/GroupManager.cpp.s
+.PHONY : src/chat/GroupManager.cpp.s
 
-src/forum/forummainwidget.o: src/forum/forummainwidget.cpp.o
-.PHONY : src/forum/forummainwidget.o
+src/common/HttpClient.o: src/common/HttpClient.cpp.o
+.PHONY : src/common/HttpClient.o
 
 # target to build an object file
-src/forum/forummainwidget.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/forum/forummainwidget.cpp.o
-.PHONY : src/forum/forummainwidget.cpp.o
+src/common/HttpClient.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/common/HttpClient.cpp.o
+.PHONY : src/common/HttpClient.cpp.o
 
-src/forum/forummainwidget.i: src/forum/forummainwidget.cpp.i
-.PHONY : src/forum/forummainwidget.i
+src/common/HttpClient.i: src/common/HttpClient.cpp.i
+.PHONY : src/common/HttpClient.i
 
 # target to preprocess a source file
-src/forum/forummainwidget.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/forum/forummainwidget.cpp.i
-.PHONY : src/forum/forummainwidget.cpp.i
+src/common/HttpClient.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/common/HttpClient.cpp.i
+.PHONY : src/common/HttpClient.cpp.i
 
-src/forum/forummainwidget.s: src/forum/forummainwidget.cpp.s
-.PHONY : src/forum/forummainwidget.s
+src/common/HttpClient.s: src/common/HttpClient.cpp.s
+.PHONY : src/common/HttpClient.s
 
 # target to generate assembly for a file
-src/forum/forummainwidget.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/forum/forummainwidget.cpp.s
-.PHONY : src/forum/forummainwidget.cpp.s
+src/common/HttpClient.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/common/HttpClient.cpp.s
+.PHONY : src/common/HttpClient.cpp.s
+
+src/forum/CreatePost.o: src/forum/CreatePost.cpp.o
+.PHONY : src/forum/CreatePost.o
+
+# target to build an object file
+src/forum/CreatePost.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/forum/CreatePost.cpp.o
+.PHONY : src/forum/CreatePost.cpp.o
+
+src/forum/CreatePost.i: src/forum/CreatePost.cpp.i
+.PHONY : src/forum/CreatePost.i
+
+# target to preprocess a source file
+src/forum/CreatePost.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/forum/CreatePost.cpp.i
+.PHONY : src/forum/CreatePost.cpp.i
+
+src/forum/CreatePost.s: src/forum/CreatePost.cpp.s
+.PHONY : src/forum/CreatePost.s
+
+# target to generate assembly for a file
+src/forum/CreatePost.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/forum/CreatePost.cpp.s
+.PHONY : src/forum/CreatePost.cpp.s
+
+src/forum/ForumWidget.o: src/forum/ForumWidget.cpp.o
+.PHONY : src/forum/ForumWidget.o
+
+# target to build an object file
+src/forum/ForumWidget.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/forum/ForumWidget.cpp.o
+.PHONY : src/forum/ForumWidget.cpp.o
+
+src/forum/ForumWidget.i: src/forum/ForumWidget.cpp.i
+.PHONY : src/forum/ForumWidget.i
+
+# target to preprocess a source file
+src/forum/ForumWidget.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/forum/ForumWidget.cpp.i
+.PHONY : src/forum/ForumWidget.cpp.i
+
+src/forum/ForumWidget.s: src/forum/ForumWidget.cpp.s
+.PHONY : src/forum/ForumWidget.s
+
+# target to generate assembly for a file
+src/forum/ForumWidget.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/forum/ForumWidget.cpp.s
+.PHONY : src/forum/ForumWidget.cpp.s
+
+src/forum/PostDetail.o: src/forum/PostDetail.cpp.o
+.PHONY : src/forum/PostDetail.o
+
+# target to build an object file
+src/forum/PostDetail.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/forum/PostDetail.cpp.o
+.PHONY : src/forum/PostDetail.cpp.o
+
+src/forum/PostDetail.i: src/forum/PostDetail.cpp.i
+.PHONY : src/forum/PostDetail.i
+
+# target to preprocess a source file
+src/forum/PostDetail.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/forum/PostDetail.cpp.i
+.PHONY : src/forum/PostDetail.cpp.i
+
+src/forum/PostDetail.s: src/forum/PostDetail.cpp.s
+.PHONY : src/forum/PostDetail.s
+
+# target to generate assembly for a file
+src/forum/PostDetail.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Talkbox-client.dir/build.make CMakeFiles/Talkbox-client.dir/src/forum/PostDetail.cpp.s
+.PHONY : src/forum/PostDetail.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
@@ -423,35 +476,42 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
-	@echo "... install"
-	@echo "... install/local"
-	@echo "... install/strip"
-	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... Talkbox-client_autogen"
 	@echo "... Talkbox-client_autogen_timestamp_deps"
+	@echo "... clean-all"
+	@echo "... run"
 	@echo "... Talkbox-client"
 	@echo "... Talkbox-client_autogen/mocs_compilation.o"
 	@echo "... Talkbox-client_autogen/mocs_compilation.i"
 	@echo "... Talkbox-client_autogen/mocs_compilation.s"
-	@echo "... src/apiclient.o"
-	@echo "... src/apiclient.i"
-	@echo "... src/apiclient.s"
-	@echo "... src/appmanager.o"
-	@echo "... src/appmanager.i"
-	@echo "... src/appmanager.s"
-	@echo "... src/auth/loginwidget.o"
-	@echo "... src/auth/loginwidget.i"
-	@echo "... src/auth/loginwidget.s"
-	@echo "... src/auth/registerwidget.o"
-	@echo "... src/auth/registerwidget.i"
-	@echo "... src/auth/registerwidget.s"
-	@echo "... src/chat/chatmainwidget.o"
-	@echo "... src/chat/chatmainwidget.i"
-	@echo "... src/chat/chatmainwidget.s"
-	@echo "... src/forum/forummainwidget.o"
-	@echo "... src/forum/forummainwidget.i"
-	@echo "... src/forum/forummainwidget.s"
+	@echo "... src/auth/LoginDialog.o"
+	@echo "... src/auth/LoginDialog.i"
+	@echo "... src/auth/LoginDialog.s"
+	@echo "... src/auth/RegisterDialog.o"
+	@echo "... src/auth/RegisterDialog.i"
+	@echo "... src/auth/RegisterDialog.s"
+	@echo "... src/chat/ChatWindow.o"
+	@echo "... src/chat/ChatWindow.i"
+	@echo "... src/chat/ChatWindow.s"
+	@echo "... src/chat/ContactList.o"
+	@echo "... src/chat/ContactList.i"
+	@echo "... src/chat/ContactList.s"
+	@echo "... src/chat/GroupManager.o"
+	@echo "... src/chat/GroupManager.i"
+	@echo "... src/chat/GroupManager.s"
+	@echo "... src/common/HttpClient.o"
+	@echo "... src/common/HttpClient.i"
+	@echo "... src/common/HttpClient.s"
+	@echo "... src/forum/CreatePost.o"
+	@echo "... src/forum/CreatePost.i"
+	@echo "... src/forum/CreatePost.s"
+	@echo "... src/forum/ForumWidget.o"
+	@echo "... src/forum/ForumWidget.i"
+	@echo "... src/forum/ForumWidget.s"
+	@echo "... src/forum/PostDetail.o"
+	@echo "... src/forum/PostDetail.i"
+	@echo "... src/forum/PostDetail.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
