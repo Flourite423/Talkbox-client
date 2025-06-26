@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ChatMainWidget</class>
+ <widget class="QWidget" name="ChatMainWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Talkbox - 聊天</string>
+  </property>
+  <property name="styleSheet">
+   <string>QWidget {
+    background-color: #f5f5f5;
+    font-family: 'Microsoft YaHei', Arial, sans-serif;
+}
+
+QListWidget {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+QListWidget::item {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+QListWidget::item:selected {
+    background-color: #007acc;
+    color: white;
+}
+
+QTextEdit {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+QPushButton {
+    background-color: #007acc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #005999;
+}
+
+QPushButton:pressed {
+    background-color: #004d7a;
+}
+
+QLineEdit {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 8px;
+}</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <property name="spacing">
+    <number>10</number>
+   </property>
+   <item>
+    <widget class="QFrame" name="leftPanel">
+     <property name="maximumSize">
+      <size>
+       <width>300</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="styleSheet">
+      <string>QFrame {
+    background-color: white;
+    border-radius: 8px;
+}</string>
+     </property>
+     <layout class="QVBoxLayout" name="leftLayout">
+      <item>
+       <widget class="QLabel" name="userInfoLabel">
+        <property name="text">
+         <string>用户信息</string>
+        </property>
+        <property name="styleSheet">
+         <string>font-size: 16px; font-weight: bold; padding: 10px; background-color: #007acc; color: white; border-radius: 5px;</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="userFrame">
+        <property name="styleSheet">
+         <string>border: none; padding: 10px;</string>
+        </property>
+        <layout class="QHBoxLayout" name="userLayout">
+         <item>
+          <widget class="QLabel" name="usernameLabel">
+           <property name="text">
+            <string>当前用户</string>
+           </property>
+           <property name="styleSheet">
+            <string>font-weight: bold; font-size: 16px;</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="userSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTabWidget" name="tabWidget">
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="contactsTab">
+         <attribute name="title">
+          <string>联系人</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="contactsLayout">
+          <item>
+           <widget class="QListWidget" name="contactsListWidget"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="groupsTab">
+         <attribute name="title">
+          <string>群组</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="groupsLayout">
+          <item>
+           <widget class="QPushButton" name="createGroupButton">
+            <property name="text">
+             <string>创建群组</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QListWidget" name="groupsListWidget"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="recentTab">
+         <attribute name="title">
+          <string>最近</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="recentLayout">
+          <item>
+           <widget class="QListWidget" name="recentListWidget"/>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="chatPanel">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="styleSheet">
+      <string>QFrame {
+    background-color: white;
+    border-radius: 8px;
+}</string>
+     </property>
+     <layout class="QVBoxLayout" name="chatLayout">
+      <item>
+       <widget class="QFrame" name="chatHeader">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string>background-color: #007acc; color: white; border-radius: 5px; padding: 10px;</string>
+        </property>
+        <layout class="QHBoxLayout" name="headerLayout">
+         <item>
+          <widget class="QLabel" name="chatTitleLabel">
+           <property name="text">
+            <string>选择一个联系人开始聊天</string>
+           </property>
+           <property name="styleSheet">
+            <string>font-size: 16px; font-weight: bold;</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="headerSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTextEdit" name="chatDisplayArea">
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+        <property name="html">
+         <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Microsoft YaHei'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#666666;&quot;&gt;聊天记录将在这里显示...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="inputFrame">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>120</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="styleSheet">
+         <string>border: 1px solid #ddd; border-radius: 5px; background-color: #fafafa;</string>
+        </property>
+        <layout class="QVBoxLayout" name="inputLayout">
+         <item>
+          <layout class="QHBoxLayout" name="toolsLayout">
+           <item>
+            <widget class="QPushButton" name="emojiButton">
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>😊</string>
+             </property>
+             <property name="styleSheet">
+              <string>background: none; border: none; font-size: 16px;</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="fileButton">
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>📎</string>
+             </property>
+             <property name="styleSheet">
+              <string>background: none; border: none; font-size: 16px;</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="imageButton">
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>🖼️</string>
+             </property>
+             <property name="styleSheet">
+              <string>background: none; border: none; font-size: 16px;</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="toolsSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="messageLayout">
+           <item>
+            <widget class="QTextEdit" name="messageInputEdit">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>60</height>
+              </size>
+             </property>
+             <property name="placeholderText">
+              <string>输入消息... (Ctrl+Enter 发送)</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="sendButton">
+             <property name="text">
+              <string>发送</string>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>60</width>
+               <height>40</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

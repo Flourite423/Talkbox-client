@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CreateGroupDialog</class>
+ <widget class="QDialog" name="CreateGroupDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>500</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>创建群组</string>
+  </property>
+  <property name="styleSheet">
+   <string>QDialog {
+    background-color: #f5f5f5;
+    font-family: 'Microsoft YaHei', Arial, sans-serif;
+}
+
+QLabel {
+    color: #333;
+}
+
+QPushButton {
+    background-color: #007acc;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #005999;
+}
+
+QPushButton:pressed {
+    background-color: #004d7a;
+}
+
+QLineEdit, QTextEdit {
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    padding: 8px;
+    font-size: 14px;
+    background-color: white;
+}
+
+QLineEdit:focus, QTextEdit:focus {
+    border-color: #007acc;
+}
+
+QListWidget {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+QListWidget::item {
+    padding: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+QCheckBox::indicator:checked {
+    background-color: #007acc;
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="titleLabel">
+     <property name="text">
+      <string>创建新群组</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="styleSheet">
+      <string>font-size: 20px; font-weight: bold; color: #007acc; padding: 15px;</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="groupInfoFrame">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="styleSheet">
+      <string>QFrame {
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 5px;
+}</string>
+     </property>
+     <layout class="QVBoxLayout" name="groupInfoLayout">
+      <item>
+       <widget class="QLabel" name="groupNameLabel">
+        <property name="text">
+         <string>群组名称</string>
+        </property>
+        <property name="styleSheet">
+         <string>font-weight: bold; margin-bottom: 5px;</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="groupNameEdit">
+        <property name="placeholderText">
+         <string>请输入群组名称</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="groupDescLabel">
+        <property name="text">
+         <string>群组描述</string>
+        </property>
+        <property name="styleSheet">
+         <string>font-weight: bold; margin-bottom: 5px; margin-top: 10px;</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTextEdit" name="groupDescEdit">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>80</height>
+         </size>
+        </property>
+        <property name="placeholderText">
+         <string>请输入群组描述（可选）</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="membersFrame">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="styleSheet">
+      <string>QFrame {
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 5px;
+}</string>
+     </property>
+     <layout class="QVBoxLayout" name="membersLayout">
+      <item>
+       <widget class="QLabel" name="membersLabel">
+        <property name="text">
+         <string>选择群组成员</string>
+        </property>
+        <property name="styleSheet">
+         <string>font-weight: bold; margin-bottom: 10px;</string>
+        </property>
+       </widget>
+      </item>       <item>
+        <widget class="QListWidget" name="contactsListWidget">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>200</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      <item>
+       <widget class="QLabel" name="selectedMembersLabel">
+        <property name="text">
+         <string>已选择成员 (0)</string>
+        </property>
+        <property name="styleSheet">
+         <string>font-weight: bold; color: #007acc;</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QListWidget" name="selectedMembersListWidget">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>100</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="buttonLayout">
+     <item>
+      <spacer name="buttonSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="cancelButton">
+       <property name="text">
+        <string>取消</string>
+       </property>
+       <property name="styleSheet">
+        <string>background-color: #6c757d;</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="createButton">
+       <property name="text">
+        <string>创建群组</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

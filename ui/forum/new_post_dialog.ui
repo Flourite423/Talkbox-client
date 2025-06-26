@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>NewPostDialog</class>
+ <widget class="QDialog" name="NewPostDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>700</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>发布新帖</string>
+  </property>
+  <property name="styleSheet">
+   <string>QDialog {
+    background-color: #f8f9fa;
+    font-family: 'Microsoft YaHei', Arial, sans-serif;
+}
+
+QLabel {
+    color: #333;
+}
+
+QPushButton {
+    background-color: #007acc;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #005999;
+}
+
+QPushButton:pressed {
+    background-color: #004d7a;
+}
+
+QLineEdit, QTextEdit {
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    padding: 8px;
+    font-size: 14px;
+    background-color: white;
+}
+
+QLineEdit:focus, QTextEdit:focus {
+    border-color: #007acc;
+}
+
+QComboBox {
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    padding: 5px;
+    background-color: white;
+}
+
+QComboBox:focus {
+    border-color: #007acc;
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="titleLabel">
+     <property name="text">
+      <string>发布新帖子</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="styleSheet">
+      <string>font-size: 22px; font-weight: bold; color: #007acc; padding: 15px;</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="postFrame">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="styleSheet">
+      <string>QFrame {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    border: 1px solid #ddd;
+}</string>
+     </property>
+     <layout class="QVBoxLayout" name="postLayout">
+      <item>
+       <layout class="QHBoxLayout" name="titleLayout">
+        <item>
+         <widget class="QLabel" name="postTitleLabel">
+          <property name="text">
+           <string>帖子标题</string>
+          </property>
+          <property name="styleSheet">
+           <string>font-weight: bold; min-width: 80px;</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="postTitleEdit">
+          <property name="placeholderText">
+           <string>请输入帖子标题（5-100个字符）</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QLabel" name="contentLabel">
+        <property name="text">
+         <string>帖子内容</string>
+        </property>
+        <property name="styleSheet">
+         <string>font-weight: bold; margin-top: 10px;</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTextEdit" name="contentEdit">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>300</height>
+         </size>
+        </property>
+        <property name="placeholderText">
+         <string>请输入帖子内容...</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="buttonLayout">
+     <item>
+      <spacer name="buttonSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="cancelButton">
+       <property name="text">
+        <string>取消</string>
+       </property>
+       <property name="styleSheet">
+        <string>background-color: #6c757d;</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="publishButton">
+       <property name="text">
+        <string>发布帖子</string>
+       </property>
+       <property name="styleSheet">
+        <string>background-color: #28a745;</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
