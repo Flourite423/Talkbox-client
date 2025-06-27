@@ -114,13 +114,13 @@ void HttpClient::uploadFile(const QString &endpoint, const QString &filePath)
     QByteArray fileData = file.readAll();
     file.close();
     
-    // 将文件数据编码为Base64
-    QString base64Data = QString(fileData.toBase64());
+    // 将文件数据编码为utf8
+    QString utf8Data = QString::fromUtf8(fileData);
     
     QJsonObject data;
     data["username"] = m_username;
     data["filename"] = fileInfo.fileName();
-    data["data"] = base64Data;
+    data["data"] = utf8Data;
     
     QNetworkRequest request = createRequest(endpoint);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");

@@ -26,7 +26,8 @@ public:
     void setUserIdToNameMap(const QMap<int, QString> &userMap);
 
 signals:
-    void postSelected(int postId, const QString &title);
+    void postSelected(int postId, const QString &title, const QString &content, 
+                     const QString &timestamp, int userId);
 
 private slots:
     void onCreatePostClicked();

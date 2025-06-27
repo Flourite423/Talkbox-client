@@ -67,11 +67,15 @@ void ForumWidget::onPostClicked()
         int postId = item->data(Qt::UserRole).toInt();
         if (postId > 0) { // 确保不是特殊项目（如空列表提示）
             QString title = item->data(Qt::UserRole + 1).toString();
+            QString content = item->data(Qt::UserRole + 2).toString();
+            QString timestamp = item->data(Qt::UserRole + 3).toString();
+            int userId = item->data(Qt::UserRole + 4).toInt();
+            
             if (title.isEmpty()) {
                 // 如果没有存储标题，从显示文本中提取
                 title = item->text().split("\n")[0].replace("📝 ", "");
             }
-            emit postSelected(postId, title);
+            emit postSelected(postId, title, content, timestamp, userId);
         }
     }
 }
@@ -86,9 +90,20 @@ void ForumWidget::onHttpResponse(const QJsonObject &response)
             QJsonArray dataArray = dataValue.toArray();
             
             // 检查是否是帖子列表响应
-            if (dataArray.isEmpty() || 
-                (!dataArray.isEmpty() && dataArray[0].toObject().contains("post_id") && 
-                 dataArray[0].toObject().contains("title"))) {
+            bool isPostListResponse = false;
+            
+            if (dataArray.isEmpty()) {
+                // 空数组可能是帖子列表响应，暂时允许（可能真的没有帖子）
+                // 为了安全，我们可以添加额外的检查
+                isPostListResponse = true; // 暂时保持原有行为
+            } else {
+                // 非空数组，检查第一个元素是否包含帖子字段
+                QJsonObject firstItem = dataArray[0].toObject();
+                isPostListResponse = firstItem.contains("post_id") && 
+                                   firstItem.contains("title");
+            }
+            
+            if (isPostListResponse) {
             // 帖子列表响应
             ui->postListWidget->clear();
             QJsonArray posts = dataArray;
@@ -126,12 +141,17 @@ void ForumWidget::onHttpResponse(const QJsonObject &response)
                 QListWidgetItem *item = new QListWidgetItem(displayText);
                 item->setData(Qt::UserRole, postId);
                 item->setData(Qt::UserRole + 1, title); // 存储标题用于传递
+                item->setData(Qt::UserRole + 2, content); // 存储内容
+                item->setData(Qt::UserRole + 3, timestamp); // 存储时间戳
+                item->setData(Qt::UserRole + 4, userId); // 存储用户ID
                 
                 // 添加一些视觉分隔
                 item->setSizeHint(QSize(0, 80));
                 
                 ui->postListWidget->addItem(item);
             }
+            } else {
+                // 忽略非帖子列表的数组响应（如群组列表、消息列表等）
             } // 结束帖子列表检查
         } else {
             // 忽略非数组响应（可能是其他组件的响应）

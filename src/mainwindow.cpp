@@ -86,12 +86,10 @@ void MainWindow::setupUI()
     connect(m_contactList, &ContactList::contactsLoaded, this, &MainWindow::onContactsLoaded);
     connect(m_groupManager, &GroupManager::groupSelected, this, &MainWindow::onGroupSelected);
     connect(m_groupManager, &GroupManager::groupSelected, m_groupChatWindow, &ChatWindow::startGroupChat);
+    connect(m_groupManager, &GroupManager::groupOperationCompleted, this, &MainWindow::onGroupOperationCompleted);
     connect(m_forumWidget, &ForumWidget::postSelected, this, &MainWindow::onPostSelected);
     connect(ui->tabWidget, &QTabWidget::currentChanged, this, &MainWindow::onTabChanged);
     connect(ui->actionLogout, &QAction::triggered, this, &MainWindow::onLogoutClicked);
-    
-    // 连接创建帖子功能
-    connect(m_forumWidget, &ForumWidget::postSelected, m_postDetail, &PostDetail::showPost);
     connect(m_createPost, &CreatePost::postCreated, m_forumWidget, &ForumWidget::refreshPosts);
     
     // 状态栏
@@ -167,9 +165,15 @@ void MainWindow::onLogoutClicked()
     ui->userLabel->setText("未登录");
     setWindowTitle("Talkbox - 聊天软件");
     
+    // 隐藏主窗口
+    hide();
+    
     if (!showLoginDialog()) {
         // 用户取消重新登录，退出应用程序
         QTimer::singleShot(0, qApp, &QApplication::quit);
+    } else {
+        // 登录成功，显示主窗口
+        show();
     }
 }
 
@@ -186,23 +190,38 @@ void MainWindow::onGroupSelected(int groupId, const QString &groupName)
     ui->tabWidget->setCurrentIndex(1); // 切换到群组标签页
 }
 
-void MainWindow::onPostSelected(int postId, const QString &title)
+void MainWindow::onPostSelected(int postId, const QString &title, const QString &content, 
+                                const QString &timestamp, int userId)
 {
-    m_postDetail->showPost(postId, title);
+    m_postDetail->showPost(postId, title, content, timestamp, userId);
 }
 
 void MainWindow::onTabChanged(int index)
 {
-    // 当切换标签页时刷新相应的数据
+    // 当切换标签页时刷新相应的数据，但增加时间间隔控制
+    QDateTime currentTime = QDateTime::currentDateTime();
+    
     switch (index) {
     case 0: // 聊天
-        m_contactList->refreshContacts();
+        if (m_lastContactRefreshTime.isNull() || 
+            m_lastContactRefreshTime.secsTo(currentTime) >= REFRESH_INTERVAL_SECONDS) {
+            m_contactList->refreshContacts();
+            m_lastContactRefreshTime = currentTime;
+        }
         break;
     case 1: // 群组
-        m_groupManager->refreshGroups();
+        if (m_lastGroupRefreshTime.isNull() || 
+            m_lastGroupRefreshTime.secsTo(currentTime) >= REFRESH_INTERVAL_SECONDS) {
+            m_groupManager->refreshGroups();
+            m_lastGroupRefreshTime = currentTime;
+        }
         break;
     case 2: // 论坛
-        m_forumWidget->refreshPosts();
+        if (m_lastForumRefreshTime.isNull() || 
+            m_lastForumRefreshTime.secsTo(currentTime) >= REFRESH_INTERVAL_SECONDS) {
+            m_forumWidget->refreshPosts();
+            m_lastForumRefreshTime = currentTime;
+        }
         break;
     }
 }
@@ -226,4 +245,15 @@ void MainWindow::onContactsLoaded(const QMap<int, QString> &userMap)
     // 更新论坛组件的用户映射
     m_forumWidget->setUserIdToNameMap(completeMapping);
     m_postDetail->setUserIdToNameMap(completeMapping);
+    
+    // 更新聊天组件的用户映射
+    m_chatWindow->setUserIdToNameMap(completeMapping);
+    m_groupChatWindow->setUserIdToNameMap(completeMapping);
+}
+
+void MainWindow::onGroupOperationCompleted()
+{
+    // 群组操作（创建、加入、退出）完成后，刷新群组列表
+    m_groupManager->refreshGroups();
+    m_lastGroupRefreshTime = QDateTime::currentDateTime(); // 更新刷新时间
 }

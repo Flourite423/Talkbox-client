@@ -131,6 +131,10 @@ void CreatePost::onHttpResponse(const QJsonObject &response)
         
         // 检查是否是创建帖子成功的响应
         if (dataValue.isString() && dataValue.toString().contains("发帖成功")) {
+            // 重置状态
+            m_isCreatingPost = false;
+            setLoading(false);
+            
             ui->statusLabel->setText("✅ 发布成功！");
             ui->statusLabel->setStyleSheet("color: green;");
             
@@ -147,7 +151,14 @@ void CreatePost::onHttpResponse(const QJsonObject &response)
     // 处理错误响应
     m_isCreatingPost = false;  // 重置状态
     setLoading(false);
-    QString errorMsg = response["data"].toString();
+    
+    QString errorMsg;
+    if (response["status"].toString() == "error") {
+        errorMsg = response["data"].toString();
+    } else {
+        errorMsg = "未知错误";
+    }
+    
     ui->statusLabel->setText("❌ 发布失败: " + errorMsg);
     ui->statusLabel->setStyleSheet("color: red;");
 }

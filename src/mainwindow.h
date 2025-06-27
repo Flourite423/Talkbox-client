@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QStackedWidget>
 #include <QMap>
+#include <QDateTime>
 #include "common/HttpClient.h"
 #include "auth/LoginDialog.h"
 #include "chat/ContactList.h"
@@ -32,7 +33,9 @@ private slots:
     void onLogoutClicked();
     void onContactSelected(int userId, const QString &username);
     void onGroupSelected(int groupId, const QString &groupName);
-    void onPostSelected(int postId, const QString &title);
+    void onGroupOperationCompleted(); // 群组操作完成后的处理
+    void onPostSelected(int postId, const QString &title, const QString &content, 
+                        const QString &timestamp, int userId);
     void onTabChanged(int index);
     void updateUserMapping();
     void onContactsLoaded(const QMap<int, QString> &userMap);
@@ -55,6 +58,12 @@ private:
     ForumWidget *m_forumWidget;
     PostDetail *m_postDetail;
     CreatePost *m_createPost;
+    
+    // 标签页刷新控制
+    QDateTime m_lastGroupRefreshTime;
+    QDateTime m_lastForumRefreshTime;
+    QDateTime m_lastContactRefreshTime;
+    static const int REFRESH_INTERVAL_SECONDS = 30; // 30秒内不重复刷新
     
     void setupUI();
     bool showLoginDialog();

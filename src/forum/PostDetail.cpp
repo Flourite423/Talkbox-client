@@ -4,10 +4,9 @@
 #include <QTimer>
 #include <QFileDialog>
 #include <QStandardPaths>
-#include <QFileDialog>
-#include <QStandardPaths>
-#include <QDebug>
 #include <QMap>
+#include <QMessageBox>
+#include <QFile>
 
 PostDetail::PostDetail(QWidget *parent)
     : QWidget(parent)
@@ -36,30 +35,34 @@ void PostDetail::setHttpClient(HttpClient *client)
     }
 }
 
-void PostDetail::showPost(int postId, const QString &title)
+void PostDetail::showPost(int postId, const QString &title, const QString &content, 
+                          const QString &timestamp, int userId)
 {
     m_currentPostId = postId;
     ui->titleLabel->setText("📝 " + title);
-    ui->contentTextEdit->clear();
     ui->repliesTextEdit->clear();
     ui->replyLineEdit->clear();
     
-    // 设置占位符文本
-    ui->contentTextEdit->setPlaceholderText("正在加载帖子内容...");
+    // 直接显示帖子内容，不需要再发起HTTP请求
+    QString userDisplayName = getUserDisplayName(userId);
+    
+    QString formattedContent = QString("👤 作者: %1\n🕒 发布时间: %2\n\n📄 内容:\n%3")
+                             .arg(userDisplayName)
+                             .arg(timestamp)
+                             .arg(content);
+    
+    ui->contentTextEdit->setPlaceholderText("");
+    ui->contentTextEdit->setPlainText(formattedContent);
+    extractAndDisplayAttachments(content); // 提取并显示附件
+    
+    // 设置回复区域占位符
     ui->repliesTextEdit->setPlaceholderText("正在加载回复...");
     
-    // 先获取帖子详情，然后加载回复
-    loadPostContent();
+    // 只加载回复
     loadReplies();
 }
 
-void PostDetail::loadPostContent()
-{
-    if (!m_httpClient || m_currentPostId == -1) return;
-    
-    // 获取帖子列表，然后找到对应的帖子
-    m_httpClient->get("/api/get_posts");
-}
+
 
 void PostDetail::onReplyClicked()
 {
@@ -104,9 +107,6 @@ void PostDetail::loadReplies()
         return;
     }
     
-    // 添加调试信息
-    qDebug() << "Loading replies for post ID:" << m_currentPostId;
-    
     QJsonObject params;
     params["post_id"] = QString::number(m_currentPostId);
     
@@ -125,41 +125,30 @@ void PostDetail::onHttpResponse(const QJsonObject &response)
     if (response["status"].toString() == "success") {
         QJsonValue dataValue = response["data"];
         
+        // 检查是否是文件下载响应
+        if (dataValue.isString() && !m_downloadingFileName.isEmpty()) {
+            QString fileData = dataValue.toString();
+            saveDownloadedFile(m_downloadingFileName, fileData);
+            m_downloadingFileName.clear();
+            m_downloadSavePath.clear();
+            return;
+        }
+        
         if (dataValue.isArray()) {
             QJsonArray dataArray = dataValue.toArray();
             
-            // 检查是否是帖子列表（包含post_id字段）还是回复列表（包含reply_id字段）
+            // 检查是否是回复列表（包含reply_id字段）
             if (!dataArray.isEmpty()) {
                 QJsonObject firstItem = dataArray[0].toObject();
                 
-                if (firstItem.contains("post_id") && firstItem.contains("title")) {
-                    // 这是帖子列表，查找当前帖子的内容
-                    for (const auto &value : dataArray) {
-                        QJsonObject post = value.toObject();
-                        if (post["post_id"].toInt() == m_currentPostId) {
-                            QString content = post["content"].toString();
-                            QString timestamp = post["timestamp"].toString();
-                            int userId = post["user_id"].toInt();
-                            
-                            QString userDisplayName = getUserDisplayName(userId);
-                            
-                            QString formattedContent = QString("👤 作者: %1\n🕒 发布时间: %2\n\n📄 内容:\n%3")
-                                                     .arg(userDisplayName)
-                                                     .arg(timestamp)
-                                                     .arg(content);
-                            
-                            ui->contentTextEdit->setPlainText(formattedContent);
-                            extractAndDisplayAttachments(content); // 提取并显示附件
-                            break;
-                        }
-                    }
-                } else if (firstItem.contains("reply_id")) {
+                if (firstItem.contains("reply_id")) {
                     // 这是回复列表
                     displayReplies(dataArray);
                 }
             } else {
                 // 空数组
                 if (ui->repliesTextEdit->toPlainText().isEmpty()) {
+                    ui->repliesTextEdit->setPlaceholderText("");
                     ui->repliesTextEdit->setPlainText("暂无回复，成为第一个回复的人吧！");
                 }
             }
@@ -176,6 +165,20 @@ void PostDetail::onHttpResponse(const QJsonObject &response)
     } else {
         QString error = response["data"].toString();
         ui->repliesTextEdit->setPlainText("加载失败: " + error);
+        
+        // 如果是文件下载失败，清除下载状态并恢复附件列表项
+        if (!m_downloadingFileName.isEmpty()) {
+            for (int i = 0; i < ui->attachmentListWidget->count(); ++i) {
+                QListWidgetItem *item = ui->attachmentListWidget->item(i);
+                QString itemFileName = item->data(Qt::UserRole).toString();
+                if (itemFileName == m_downloadingFileName) {
+                    item->setText("📎 " + m_downloadingFileName);
+                    break;
+                }
+            }
+            m_downloadingFileName.clear();
+            m_downloadSavePath.clear();
+        }
     }
 }
 
@@ -262,6 +265,8 @@ void PostDetail::onAttachmentClicked()
         
         if (!savePath.isEmpty()) {
             item->setText("📎 " + filename + " (下载中...)");
+            m_downloadingFileName = filename;
+            m_downloadSavePath = savePath;
             m_httpClient->downloadFile("/api/download_file", filename);
         }
     }
@@ -286,4 +291,44 @@ QString PostDetail::getUserDisplayName(int userId)
     
     // 否则返回 "用户{ID}" 格式
     return QString("用户%1").arg(userId);
+}
+
+void PostDetail::saveDownloadedFile(const QString &fileName, const QString &fileData)
+{
+    if (m_downloadSavePath.isEmpty()) {
+        return;
+    }
+    
+    // 将utf8格式的文件数据转换为字节数组并保存文件
+    QByteArray fileDataBytes = fileData.toUtf8();
+    
+    QFile file(m_downloadSavePath);
+    if (file.open(QIODevice::WriteOnly)) {
+        file.write(fileDataBytes);
+        file.close();
+        
+        // 恢复附件列表项的原始文本
+        for (int i = 0; i < ui->attachmentListWidget->count(); ++i) {
+            QListWidgetItem *item = ui->attachmentListWidget->item(i);
+            QString itemFileName = item->data(Qt::UserRole).toString();
+            if (itemFileName == fileName) {
+                item->setText("📎 " + fileName);
+                break;
+            }
+        }
+        
+        QMessageBox::information(this, "成功", "文件已保存到: " + m_downloadSavePath);
+    } else {
+        QMessageBox::warning(this, "错误", "无法保存文件: " + file.errorString());
+        
+        // 恢复附件列表项的原始文本
+        for (int i = 0; i < ui->attachmentListWidget->count(); ++i) {
+            QListWidgetItem *item = ui->attachmentListWidget->item(i);
+            QString itemFileName = item->data(Qt::UserRole).toString();
+            if (itemFileName == fileName) {
+                item->setText("📎 " + fileName);
+                break;
+            }
+        }
+    }
 }
