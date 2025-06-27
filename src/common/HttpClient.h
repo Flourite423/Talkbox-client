@@ -16,13 +16,16 @@ public:
     explicit HttpClient(QObject *parent = nullptr);
     
     void setBaseUrl(const QString &url);
-    void setToken(const QString &token);
+    void setUsername(const QString &username);
     void setTimeout(int timeoutMs);
     
     void get(const QString &endpoint, const QJsonObject &params = QJsonObject());
+    void getWithJsonBody(const QString &endpoint, const QJsonObject &data);
     void post(const QString &endpoint, const QJsonObject &data);
     void put(const QString &endpoint, const QJsonObject &data);
     void deleteRequest(const QString &endpoint);
+    void uploadFile(const QString &endpoint, const QString &filePath);
+    void downloadFile(const QString &endpoint, const QString &filename);
 
 signals:
     void responseReceived(const QJsonObject &response);
@@ -35,7 +38,7 @@ private slots:
 private:
     QNetworkAccessManager *m_manager;
     QString m_baseUrl;
-    QString m_token;
+    QString m_username;
     int m_timeoutMs;
     QHash<QNetworkReply*, QTimer*> m_timers;
     

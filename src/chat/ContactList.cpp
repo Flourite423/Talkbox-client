@@ -2,6 +2,7 @@
 #include "ui_ContactList.h"
 #include <QListWidgetItem>
 #include <QJsonArray>
+#include <QMap>
 
 ContactList::ContactList(QWidget *parent)
     : QWidget(parent)
@@ -27,10 +28,17 @@ void ContactList::setHttpClient(HttpClient *client)
     }
 }
 
+void ContactList::setCurrentUsername(const QString &username)
+{
+    m_currentUsername = username;
+}
+
 void ContactList::refreshContacts()
 {
-    if (m_httpClient) {
-        m_httpClient->get("/api/get_contacts");
+    if (m_httpClient && !m_currentUsername.isEmpty()) {
+        QJsonObject params;
+        params["username"] = m_currentUsername;
+        m_httpClient->get("/api/get_contacts", params);
     }
 }
 
@@ -47,6 +55,7 @@ void ContactList::onHttpResponse(const QJsonObject &response)
 {
     if (response["status"].toString() == "success") {
         ui->contactListWidget->clear();
+        m_userMapping.clear();
         
         QJsonArray contacts = response["data"].toArray();
         for (const auto &value : contacts) {
@@ -55,10 +64,21 @@ void ContactList::onHttpResponse(const QJsonObject &response)
             QString username = contact["username"].toString();
             bool online = contact["online"].toBool();
             
+            // 建立用户映射
+            m_userMapping[userId] = username;
+            
             QString displayText = username + " - " + (online ? "在线" : "离线");
             QListWidgetItem *item = new QListWidgetItem(displayText);
             item->setData(Qt::UserRole, userId);
             ui->contactListWidget->addItem(item);
         }
+        
+        // 发出联系人加载完成信号
+        emit contactsLoaded(m_userMapping);
     }
+}
+
+QMap<int, QString> ContactList::getUserMapping() const
+{
+    return m_userMapping;
 }

@@ -29,6 +29,23 @@
     </widget>
    </item>
    <item>
+    <widget class="QLabel" name="attachmentLabel">
+     <property name="text">
+      <string>附件:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QListWidget" name="attachmentListWidget">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>80</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QLabel" name="repliesLabel">
      <property name="text">
       <string>回复列表:</string>

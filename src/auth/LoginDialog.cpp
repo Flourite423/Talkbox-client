@@ -4,6 +4,7 @@
 #include <QJsonObject>
 #include <QRegularExpression>
 #include <QTimer>
+#include <QCloseEvent>
 
 LoginDialog::LoginDialog(QWidget *parent)
     : QDialog(parent)
@@ -136,14 +137,13 @@ void LoginDialog::onHttpResponse(const QJsonObject &response)
         } else {
             // 登录成功
             QJsonObject data = response["data"].toObject();
-            QString token = data["token"].toString();
             QString username = data["username"].toString();
             int userId = data["user_id"].toInt();
             
             ui->statusLabel->setText("登录成功！");
             ui->statusLabel->setStyleSheet("color: green;");
             
-            emit loginSuccessful(token, username, userId);
+            emit loginSuccessful("", username, userId); // token不再使用，传空字符串
             accept();
         }
     } else {
@@ -245,4 +245,17 @@ bool LoginDialog::validateInput()
     }
     
     return true;
+}
+
+void LoginDialog::closeEvent(QCloseEvent *event)
+{
+    // 用户直接关闭窗口，确保返回 Rejected 状态
+    QDialog::reject();
+    event->accept();
+}
+
+void LoginDialog::reject()
+{
+    // 确保对话框返回 Rejected 状态
+    QDialog::reject();
 }

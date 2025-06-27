@@ -2,6 +2,12 @@
 #include "ui_PostDetail.h"
 #include <QJsonArray>
 #include <QTimer>
+#include <QFileDialog>
+#include <QStandardPaths>
+#include <QFileDialog>
+#include <QStandardPaths>
+#include <QDebug>
+#include <QMap>
 
 PostDetail::PostDetail(QWidget *parent)
     : QWidget(parent)
@@ -14,6 +20,7 @@ PostDetail::PostDetail(QWidget *parent)
     connect(ui->replyButton, &QPushButton::clicked, this, &PostDetail::onReplyClicked);
     connect(ui->refreshRepliesButton, &QPushButton::clicked, this, &PostDetail::onRefreshRepliesClicked);
     connect(ui->replyLineEdit, &QLineEdit::returnPressed, this, &PostDetail::onReplyClicked);
+    connect(ui->attachmentListWidget, &QListWidget::itemDoubleClicked, this, &PostDetail::onAttachmentClicked);
 }
 
 PostDetail::~PostDetail()
@@ -71,7 +78,8 @@ void PostDetail::onReplyClicked()
     ui->replyLineEdit->setEnabled(false);
     
     QJsonObject data;
-    data["post_id"] = m_currentPostId;
+    data["username"] = m_currentUsername;
+    data["post_id"] = QString::number(m_currentPostId);
     data["content"] = content;
     
     m_httpClient->post("/api/reply_post", data);
@@ -86,12 +94,23 @@ void PostDetail::onRefreshRepliesClicked()
 
 void PostDetail::loadReplies()
 {
-    if (!m_httpClient || m_currentPostId == -1) return;
+    if (!m_httpClient) {
+        ui->repliesTextEdit->setPlainText("HTTP客户端未初始化");
+        return;
+    }
     
-    QJsonObject data;
-    data["post_id"] = m_currentPostId;
+    if (m_currentPostId == -1) {
+        ui->repliesTextEdit->setPlainText("请先选择一个帖子查看回复");
+        return;
+    }
     
-    m_httpClient->post("/api/get_post_replies", data);
+    // 添加调试信息
+    qDebug() << "Loading replies for post ID:" << m_currentPostId;
+    
+    QJsonObject params;
+    params["post_id"] = QString::number(m_currentPostId);
+    
+    m_httpClient->get("/api/get_post_replies", params);
 }
 
 void PostDetail::onHttpResponse(const QJsonObject &response)
@@ -122,12 +141,15 @@ void PostDetail::onHttpResponse(const QJsonObject &response)
                             QString timestamp = post["timestamp"].toString();
                             int userId = post["user_id"].toInt();
                             
-                            QString formattedContent = QString("👤 作者: 用户%1\n🕒 发布时间: %2\n\n📄 内容:\n%3")
-                                                     .arg(userId)
+                            QString userDisplayName = getUserDisplayName(userId);
+                            
+                            QString formattedContent = QString("👤 作者: %1\n🕒 发布时间: %2\n\n📄 内容:\n%3")
+                                                     .arg(userDisplayName)
                                                      .arg(timestamp)
                                                      .arg(content);
                             
                             ui->contentTextEdit->setPlainText(formattedContent);
+                            extractAndDisplayAttachments(content); // 提取并显示附件
                             break;
                         }
                     }
@@ -174,9 +196,11 @@ void PostDetail::displayReplies(const QJsonArray &replies)
         QString content = reply["content"].toString();
         QString timestamp = reply["timestamp"].toString();
         
-        QString replyText = QString("🏷️ #%1  👤 用户%2  🕒 %3\n💭 %4\n")
+        QString userDisplayName = getUserDisplayName(userId);
+        
+        QString replyText = QString("🏷️ #%1  👤 %2  🕒 %3\n💭 %4\n")
                           .arg(i + 1)
-                          .arg(userId)
+                          .arg(userDisplayName)
                           .arg(timestamp)
                           .arg(content);
         
@@ -188,4 +212,78 @@ void PostDetail::displayReplies(const QJsonArray &replies)
     }
     
     ui->repliesTextEdit->setPlainText(repliesText);
+}
+
+void PostDetail::extractAndDisplayAttachments(const QString &content)
+{
+    ui->attachmentListWidget->clear();
+    QStringList lines = content.split('\n');
+    QStringList attachments;
+    
+    // 提取附件信息
+    for (const QString &line : lines) {
+        if (line.trimmed().startsWith("📎 附件:")) {
+            QString filename = line.split("📎 附件:").last().trimmed();
+            if (!filename.isEmpty()) {
+                attachments.append(filename);
+            }
+        }
+    }
+    
+    // 显示附件列表
+    if (attachments.isEmpty()) {
+        ui->attachmentLabel->hide();
+        ui->attachmentListWidget->hide();
+    } else {
+        ui->attachmentLabel->show();
+        ui->attachmentListWidget->show();
+        
+        for (const QString &filename : attachments) {
+            QListWidgetItem *item = new QListWidgetItem("📎 " + filename + " (双击下载)");
+            item->setData(Qt::UserRole, filename);
+            ui->attachmentListWidget->addItem(item);
+        }
+    }
+}
+
+void PostDetail::onAttachmentClicked()
+{
+    QListWidgetItem *item = ui->attachmentListWidget->currentItem();
+    if (item && m_httpClient) {
+        QString filename = item->data(Qt::UserRole).toString();
+        
+        // 提示用户选择保存位置
+        QString savePath = QFileDialog::getSaveFileName(
+            this,
+            "保存文件",
+            QStandardPaths::writableLocation(QStandardPaths::DownloadLocation) + "/" + filename,
+            "所有文件 (*)"
+        );
+        
+        if (!savePath.isEmpty()) {
+            item->setText("📎 " + filename + " (下载中...)");
+            m_httpClient->downloadFile("/api/download_file", filename);
+        }
+    }
+}
+
+void PostDetail::setCurrentUsername(const QString &username)
+{
+    m_currentUsername = username;
+}
+
+void PostDetail::setUserIdToNameMap(const QMap<int, QString> &userMap)
+{
+    m_userIdToNameMap = userMap;
+}
+
+QString PostDetail::getUserDisplayName(int userId)
+{
+    // 如果在映射中找到用户名，返回用户名
+    if (m_userIdToNameMap.contains(userId)) {
+        return m_userIdToNameMap[userId];
+    }
+    
+    // 否则返回 "用户{ID}" 格式
+    return QString("用户%1").arg(userId);
 }

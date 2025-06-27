@@ -21,7 +21,9 @@ public:
     ~ForumWidget();
     
     void setHttpClient(HttpClient *client);
+    void setCurrentUsername(const QString &username);
     void refreshPosts();
+    void setUserIdToNameMap(const QMap<int, QString> &userMap);
 
 signals:
     void postSelected(int postId, const QString &title);
@@ -35,8 +37,11 @@ private slots:
 private:
     Ui::ForumWidget *ui;
     HttpClient *m_httpClient;
+    QString m_currentUsername;
+    QMap<int, QString> m_userIdToNameMap;  // 用户ID到用户名的映射
     
     QString formatTimestamp(const QString &timestamp);
+    QString getUserDisplayName(int userId);  // 获取用户显示名称
 };
 
 #endif // FORUMWIDGET_H

@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QStackedWidget>
+#include <QMap>
 #include "common/HttpClient.h"
 #include "auth/LoginDialog.h"
 #include "chat/ContactList.h"
@@ -33,6 +34,8 @@ private slots:
     void onGroupSelected(int groupId, const QString &groupName);
     void onPostSelected(int postId, const QString &title);
     void onTabChanged(int index);
+    void updateUserMapping();
+    void onContactsLoaded(const QMap<int, QString> &userMap);
 
 private:
     Ui::MainWindow *ui;
@@ -42,17 +45,19 @@ private:
     QString m_token;
     QString m_username;
     int m_userId;
+    bool m_loginSuccessful;
     
     // UI组件
     ContactList *m_contactList;
     ChatWindow *m_chatWindow;
+    ChatWindow *m_groupChatWindow;
     GroupManager *m_groupManager;
     ForumWidget *m_forumWidget;
     PostDetail *m_postDetail;
     CreatePost *m_createPost;
     
     void setupUI();
-    void showLoginDialog();
+    bool showLoginDialog();
     void updateUserInfo();
 };
 

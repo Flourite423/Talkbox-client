@@ -19,6 +19,7 @@ public:
     ~ChatWindow();
     
     void setHttpClient(HttpClient *client);
+    void setCurrentUsername(const QString &username);
     void startPrivateChat(int userId, const QString &username);
     void startGroupChat(int groupId, const QString &groupName);
     void refreshMessages();
@@ -34,6 +35,7 @@ private:
     int m_currentGroupId; // 群聊时的群组ID
     bool m_isGroupChat;   // 是否为群聊
     QString m_chatTitle;  // 聊天标题
+    QString m_currentUsername; // 当前用户名
 };
 
 #endif // CHATWINDOW_H

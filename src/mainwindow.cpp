@@ -3,16 +3,35 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QMessageBox>
+#include <QTimer>
+#include <QApplication>
+#include <QMap>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
     , m_httpClient(new HttpClient(this))
     , m_userId(-1)
+    , m_loginSuccessful(false)
 {
     ui->setupUi(this);
     setupUI();
-    showLoginDialog();
+    
+    // 先隐藏主窗口，等登录成功后再显示
+    hide();
+    
+    if (!showLoginDialog()) {
+        // 用户取消登录，应该退出应用程序
+        QTimer::singleShot(0, qApp, &QApplication::quit);
+        return;
+    }
+    
+    // 检查登录是否成功
+    if (m_loginSuccessful) {
+        show();
+    } else {
+        QTimer::singleShot(0, qApp, &QApplication::quit);
+    }
 }
 
 MainWindow::~MainWindow()
@@ -50,10 +69,10 @@ void MainWindow::setupUI()
     groupManagerLayout->addWidget(m_groupManager);
     
     // 群聊窗口复用聊天窗口组件，但需要另一个实例
-    ChatWindow *groupChatWindow = new ChatWindow(this);
-    groupChatWindow->setHttpClient(m_httpClient);
+    m_groupChatWindow = new ChatWindow(this);
+    m_groupChatWindow->setHttpClient(m_httpClient);
     QVBoxLayout *groupChatLayout = new QVBoxLayout(ui->groupChatWidget);
-    groupChatLayout->addWidget(groupChatWindow);
+    groupChatLayout->addWidget(m_groupChatWindow);
     
     // 设置布局 - 论坛标签页
     QVBoxLayout *forumListLayout = new QVBoxLayout(ui->forumListWidget);
@@ -64,8 +83,9 @@ void MainWindow::setupUI()
     
     // 连接信号槽
     connect(m_contactList, &ContactList::contactSelected, this, &MainWindow::onContactSelected);
+    connect(m_contactList, &ContactList::contactsLoaded, this, &MainWindow::onContactsLoaded);
     connect(m_groupManager, &GroupManager::groupSelected, this, &MainWindow::onGroupSelected);
-    connect(m_groupManager, &GroupManager::groupSelected, groupChatWindow, &ChatWindow::startGroupChat);
+    connect(m_groupManager, &GroupManager::groupSelected, m_groupChatWindow, &ChatWindow::startGroupChat);
     connect(m_forumWidget, &ForumWidget::postSelected, this, &MainWindow::onPostSelected);
     connect(ui->tabWidget, &QTabWidget::currentChanged, this, &MainWindow::onTabChanged);
     connect(ui->actionLogout, &QAction::triggered, this, &MainWindow::onLogoutClicked);
@@ -78,26 +98,44 @@ void MainWindow::setupUI()
     ui->statusbar->addWidget(ui->userLabel);
 }
 
-void MainWindow::showLoginDialog()
+bool MainWindow::showLoginDialog()
 {
     LoginDialog *loginDialog = new LoginDialog(this);
-    connect(loginDialog, &LoginDialog::loginSuccessful, this, &MainWindow::onLoginSuccessful);
     
-    if (loginDialog->exec() != QDialog::Accepted) {
-        // 用户取消登录，退出应用
-        close();
-    }
+    // 使用局部变量来跟踪登录状态
+    bool loginSucceeded = false;
+    
+    connect(loginDialog, &LoginDialog::loginSuccessful, 
+            [this, &loginSucceeded](const QString &token, const QString &username, int userId) {
+                onLoginSuccessful(token, username, userId);
+                loginSucceeded = true;
+            });
+    
+    int result = loginDialog->exec();
     
     loginDialog->deleteLater();
+    
+    return (result == QDialog::Accepted && loginSucceeded);
 }
 
 void MainWindow::onLoginSuccessful(const QString &token, const QString &username, int userId)
 {
-    m_token = token;
+    m_token = token; // 保留为兼容性，但不再使用
     m_username = username;
     m_userId = userId;
+    m_loginSuccessful = true;
     
-    m_httpClient->setToken(token);
+    m_httpClient->setUsername(username);
+    
+    // 设置各组件的当前用户名
+    m_contactList->setCurrentUsername(username);
+    m_chatWindow->setCurrentUsername(username);
+    m_groupChatWindow->setCurrentUsername(username);
+    m_groupManager->setCurrentUsername(username);
+    m_forumWidget->setCurrentUsername(username);
+    m_postDetail->setCurrentUsername(username);
+    m_createPost->setCurrentUsername(username);
+    
     updateUserInfo();
     
     // 初始化数据
@@ -114,19 +152,25 @@ void MainWindow::updateUserInfo()
 
 void MainWindow::onLogoutClicked()
 {
-    if (m_httpClient && !m_token.isEmpty()) {
-        m_httpClient->post("/api/logout", QJsonObject());
+    if (m_httpClient && !m_username.isEmpty()) {
+        QJsonObject data;
+        data["username"] = m_username;
+        m_httpClient->post("/api/logout", data);
     }
     
     m_token.clear();
     m_username.clear();
     m_userId = -1;
-    m_httpClient->setToken("");
+    m_loginSuccessful = false;
+    m_httpClient->setUsername("");
     
     ui->userLabel->setText("未登录");
     setWindowTitle("Talkbox - 聊天软件");
     
-    showLoginDialog();
+    if (!showLoginDialog()) {
+        // 用户取消重新登录，退出应用程序
+        QTimer::singleShot(0, qApp, &QApplication::quit);
+    }
 }
 
 void MainWindow::onContactSelected(int userId, const QString &username)
@@ -161,4 +205,25 @@ void MainWindow::onTabChanged(int index)
         m_forumWidget->refreshPosts();
         break;
     }
+}
+
+void MainWindow::updateUserMapping()
+{
+    // 为论坛组件设置当前用户的映射
+    QMap<int, QString> userMapping;
+    userMapping[m_userId] = m_username;
+    
+    m_forumWidget->setUserIdToNameMap(userMapping);
+    m_postDetail->setUserIdToNameMap(userMapping);
+}
+
+void MainWindow::onContactsLoaded(const QMap<int, QString> &userMap)
+{
+    // 完整的用户映射，包括联系人和当前用户
+    QMap<int, QString> completeMapping = userMap;
+    completeMapping[m_userId] = m_username;  // 添加当前用户
+    
+    // 更新论坛组件的用户映射
+    m_forumWidget->setUserIdToNameMap(completeMapping);
+    m_postDetail->setUserIdToNameMap(completeMapping);
 }

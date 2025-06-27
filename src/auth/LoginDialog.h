@@ -22,6 +22,10 @@ public:
 signals:
     void loginSuccessful(const QString &token, const QString &username, int userId);
 
+protected:
+    void closeEvent(QCloseEvent *event) override;
+    void reject() override;
+
 private slots:
     void onLoginClicked();
     void onRegisterClicked();

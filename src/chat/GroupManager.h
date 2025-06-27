@@ -19,6 +19,7 @@ public:
     ~GroupManager();
     
     void setHttpClient(HttpClient *client);
+    void setCurrentUsername(const QString &username);
     void refreshGroups();
 
 signals:
@@ -34,6 +35,7 @@ private slots:
 private:
     Ui::GroupManager *ui;
     HttpClient *m_httpClient;
+    QString m_currentUsername;
 };
 
 #endif // GROUPMANAGER_H

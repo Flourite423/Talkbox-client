@@ -33,8 +33,10 @@ void GroupManager::setHttpClient(HttpClient *client)
 
 void GroupManager::refreshGroups()
 {
-    if (m_httpClient) {
-        m_httpClient->get("/api/get_groups");
+    if (m_httpClient && !m_currentUsername.isEmpty()) {
+        QJsonObject params;
+        params["username"] = m_currentUsername;
+        m_httpClient->get("/api/get_groups", params);
     }
 }
 
@@ -51,6 +53,7 @@ void GroupManager::onCreateGroupClicked()
     if (!m_httpClient) return;
     
     QJsonObject data;
+    data["username"] = m_currentUsername;
     data["group_name"] = groupName;
     data["description"] = description;
     
@@ -71,6 +74,7 @@ void GroupManager::onJoinGroupClicked()
     int groupId = item->data(Qt::UserRole).toInt();
     
     QJsonObject data;
+    data["username"] = m_currentUsername;
     data["group_id"] = groupId;
     
     m_httpClient->post("/api/join_group", data);
@@ -87,6 +91,7 @@ void GroupManager::onLeaveGroupClicked()
     int groupId = item->data(Qt::UserRole).toInt();
     
     QJsonObject data;
+    data["username"] = m_currentUsername;
     data["group_id"] = groupId;
     
     m_httpClient->post("/api/leave_group", data);
@@ -139,4 +144,9 @@ void GroupManager::onHttpResponse(const QJsonObject &response)
     } else {
         ui->statusLabel->setText("错误: " + response["data"].toString());
     }
+}
+
+void GroupManager::setCurrentUsername(const QString &username)
+{
+    m_currentUsername = username;
 }

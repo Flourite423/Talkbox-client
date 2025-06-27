@@ -2,6 +2,9 @@
 #include "ui_CreatePost.h"
 #include <QMessageBox>
 #include <QTimer>
+#include <QFileDialog>
+#include <QFileInfo>
+#include <QStandardPaths>
 
 CreatePost::CreatePost(QWidget *parent)
     : QDialog(parent)
@@ -13,6 +16,8 @@ CreatePost::CreatePost(QWidget *parent)
     
     connect(ui->createButton, &QPushButton::clicked, this, &CreatePost::onCreateClicked);
     connect(ui->cancelButton, &QPushButton::clicked, this, &QDialog::reject);
+    connect(ui->selectFileButton, &QPushButton::clicked, this, &CreatePost::onSelectFileClicked);
+    connect(ui->clearFileButton, &QPushButton::clicked, this, &CreatePost::onClearFileClicked);
     
     // 设置窗口属性
     setModal(true);
@@ -60,9 +65,6 @@ void CreatePost::onCreateClicked()
         return;
     }
     
-    QString title = ui->titleLineEdit->text().trimmed();
-    QString content = ui->contentTextEdit->toPlainText().trimmed();
-    
     if (!m_httpClient) {
         ui->statusLabel->setText("网络组件未初始化");
         ui->statusLabel->setStyleSheet("color: red;");
@@ -71,14 +73,33 @@ void CreatePost::onCreateClicked()
     
     setLoading(true);
     m_isCreatingPost = true;  // 设置创建状态
-    ui->statusLabel->setText("正在发布帖子...");
-    ui->statusLabel->setStyleSheet("color: blue;");
     
-    QJsonObject data;
-    data["title"] = title;
-    data["content"] = content;
-    
-    m_httpClient->post("/api/create_post", data);
+    // 如果有文件需要上传，先上传文件再创建帖子
+    if (!m_selectedFilePath.isEmpty()) {
+        ui->statusLabel->setText("正在上传文件...");
+        ui->statusLabel->setStyleSheet("color: blue;");
+        uploadFileAndCreatePost();
+    } else {
+        // 直接创建帖子
+        ui->statusLabel->setText("正在发布帖子...");
+        ui->statusLabel->setStyleSheet("color: blue;");
+        
+        QString title = ui->titleLineEdit->text().trimmed();
+        QString content = ui->contentTextEdit->toPlainText().trimmed();
+        
+        QJsonObject data;
+        data["username"] = m_currentUsername;
+        data["title"] = title;
+        data["content"] = content;
+        
+        m_httpClient->post("/api/create_post", data);
+    }
+}
+
+void CreatePost::uploadFileAndCreatePost()
+{
+    // 使用HttpClient上传文件
+    m_httpClient->uploadFile("/api/upload_file", m_selectedFilePath);
 }
 
 void CreatePost::onHttpResponse(const QJsonObject &response)
@@ -88,33 +109,47 @@ void CreatePost::onHttpResponse(const QJsonObject &response)
         return;
     }
     
-    m_isCreatingPost = false;  // 重置状态
-    setLoading(false);
-    
-    // 检查响应是否是创建帖子的响应（通过检查返回的数据结构）
-    if (response.contains("status")) {
-        if (response["status"].toString() == "success") {
-            // 检查是否是创建帖子成功的响应
-            QJsonValue dataValue = response["data"];
-            if (dataValue.isString() && dataValue.toString().contains("发帖成功")) {
-                ui->statusLabel->setText("✅ 发布成功！");
-                ui->statusLabel->setStyleSheet("color: green;");
-                
-                emit postCreated();
-                
-                // 延迟关闭对话框，让用户看到成功信息
-                QTimer::singleShot(1000, this, [this]() {
-                    accept();
-                });
-                return;
-            }
+    if (response["status"].toString() == "success") {
+        // 检查是否是文件上传成功的响应
+        QJsonValue dataValue = response["data"];
+        if (dataValue.isString() && dataValue.toString() == "文件上传成功") {
+            // 文件上传成功，现在创建帖子
+            ui->statusLabel->setText("文件上传成功，正在发布帖子...");
+            ui->statusLabel->setStyleSheet("color: blue;");
+            
+            QString title = ui->titleLineEdit->text().trimmed();
+            QString content = ui->contentTextEdit->toPlainText().trimmed();
+            
+            QJsonObject data;
+            data["username"] = m_currentUsername;
+            data["title"] = title;
+            data["content"] = content;
+            
+            m_httpClient->post("/api/create_post", data);
+            return;
         }
         
-        // 处理错误响应
-        QString errorMsg = response["data"].toString();
-        ui->statusLabel->setText("❌ 发布失败: " + errorMsg);
-        ui->statusLabel->setStyleSheet("color: red;");
+        // 检查是否是创建帖子成功的响应
+        if (dataValue.isString() && dataValue.toString().contains("发帖成功")) {
+            ui->statusLabel->setText("✅ 发布成功！");
+            ui->statusLabel->setStyleSheet("color: green;");
+            
+            emit postCreated();
+            
+            // 延迟关闭对话框，让用户看到成功信息
+            QTimer::singleShot(1000, this, [this]() {
+                accept();
+            });
+            return;
+        }
     }
+    
+    // 处理错误响应
+    m_isCreatingPost = false;  // 重置状态
+    setLoading(false);
+    QString errorMsg = response["data"].toString();
+    ui->statusLabel->setText("❌ 发布失败: " + errorMsg);
+    ui->statusLabel->setStyleSheet("color: red;");
 }
 
 void CreatePost::onHttpError(const QString &error)
@@ -188,10 +223,69 @@ void CreatePost::setLoading(bool loading)
     ui->cancelButton->setEnabled(!loading);
     ui->titleLineEdit->setEnabled(!loading);
     ui->contentTextEdit->setEnabled(!loading);
+    ui->selectFileButton->setEnabled(!loading);
+    ui->clearFileButton->setEnabled(!loading && !m_selectedFilePath.isEmpty());
     
     if (loading) {
         ui->createButton->setText("发布中...");
     } else {
         ui->createButton->setText("发布");
     }
+}
+
+void CreatePost::onSelectFileClicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(
+        this,
+        "选择要上传的文件",
+        QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation),
+        "所有文件 (*);;图片文件 (*.png *.jpg *.jpeg *.gif *.bmp);;文档文件 (*.txt *.pdf *.doc *.docx)"
+    );
+    
+    if (!fileName.isEmpty()) {
+        QFileInfo fileInfo(fileName);
+        
+        // 检查文件大小（限制为10MB）
+        if (fileInfo.size() > 10 * 1024 * 1024) {
+            QMessageBox::warning(this, "文件过大", "文件大小不能超过10MB");
+            return;
+        }
+        
+        m_selectedFilePath = fileName;
+        ui->filePathLineEdit->setText(fileInfo.fileName());
+        ui->clearFileButton->setEnabled(true);
+        
+        // 在内容中添加文件引用
+        QString currentContent = ui->contentTextEdit->toPlainText();
+        if (!currentContent.isEmpty() && !currentContent.endsWith("\n")) {
+            currentContent += "\n";
+        }
+        currentContent += QString("\n📎 附件: %1").arg(fileInfo.fileName());
+        ui->contentTextEdit->setPlainText(currentContent);
+    }
+}
+
+void CreatePost::onClearFileClicked()
+{
+    m_selectedFilePath.clear();
+    ui->filePathLineEdit->clear();
+    ui->clearFileButton->setEnabled(false);
+    
+    // 从内容中移除文件引用
+    QString content = ui->contentTextEdit->toPlainText();
+    QStringList lines = content.split('\n');
+    QStringList filteredLines;
+    
+    for (const QString &line : lines) {
+        if (!line.startsWith("📎 附件:")) {
+            filteredLines.append(line);
+        }
+    }
+    
+    ui->contentTextEdit->setPlainText(filteredLines.join('\n').trimmed());
+}
+
+void CreatePost::setCurrentUsername(const QString &username)
+{
+    m_currentUsername = username;
 }

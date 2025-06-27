@@ -4,6 +4,10 @@
 #include <QUrlQuery>
 #include <QTimer>
 #include <QHash>
+#include <QFile>
+#include <QFileInfo>
+#include <QHttpMultiPart>
+#include <QHttpPart>
 
 HttpClient::HttpClient(QObject *parent)
     : QObject(parent)
@@ -18,9 +22,9 @@ void HttpClient::setBaseUrl(const QString &url)
     m_baseUrl = url;
 }
 
-void HttpClient::setToken(const QString &token)
+void HttpClient::setUsername(const QString &username)
 {
-    m_token = token;
+    m_username = username;
 }
 
 void HttpClient::setTimeout(int timeoutMs)
@@ -44,6 +48,25 @@ void HttpClient::get(const QString &endpoint, const QJsonObject &params)
     request.setUrl(url);
     
     QNetworkReply *reply = m_manager->get(request);
+    setupReply(reply);
+}
+
+void HttpClient::getWithJsonBody(const QString &endpoint, const QJsonObject &data)
+{
+    QNetworkRequest request = createRequest(endpoint);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    
+    // 添加用户名到数据中
+    QJsonObject requestData = data;
+    if (!m_username.isEmpty() && !requestData.contains("username")) {
+        requestData["username"] = m_username;
+    }
+    
+    QJsonDocument doc(requestData);
+    QByteArray jsonData = doc.toJson();
+    
+    // 使用 sendCustomRequest 发送带有请求体的 GET 请求
+    QNetworkReply *reply = m_manager->sendCustomRequest(request, "GET", jsonData);
     setupReply(reply);
 }
 
@@ -76,6 +99,50 @@ void HttpClient::deleteRequest(const QString &endpoint)
     QNetworkRequest request = createRequest(endpoint);
     
     QNetworkReply *reply = m_manager->deleteResource(request);
+    setupReply(reply);
+}
+
+void HttpClient::uploadFile(const QString &endpoint, const QString &filePath)
+{
+    QFile file(filePath);
+    if (!file.open(QIODevice::ReadOnly)) {
+        emit errorOccurred("无法打开文件: " + filePath);
+        return;
+    }
+    
+    QFileInfo fileInfo(filePath);
+    QByteArray fileData = file.readAll();
+    file.close();
+    
+    // 将文件数据编码为Base64
+    QString base64Data = QString(fileData.toBase64());
+    
+    QJsonObject data;
+    data["username"] = m_username;
+    data["filename"] = fileInfo.fileName();
+    data["data"] = base64Data;
+    
+    QNetworkRequest request = createRequest(endpoint);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    
+    QJsonDocument doc(data);
+    QByteArray jsonData = doc.toJson();
+    
+    QNetworkReply *reply = m_manager->post(request, jsonData);
+    setupReply(reply);
+}
+
+void HttpClient::downloadFile(const QString &endpoint, const QString &filename)
+{
+    QUrl url(m_baseUrl + endpoint);
+    QUrlQuery query;
+    query.addQueryItem("filename", filename);
+    url.setQuery(query);
+    
+    QNetworkRequest request = createRequest(endpoint);
+    request.setUrl(url);
+    
+    QNetworkReply *reply = m_manager->get(request);
     setupReply(reply);
 }
 
@@ -151,10 +218,6 @@ QNetworkRequest HttpClient::createRequest(const QString &endpoint)
     // 设置常用请求头
     request.setRawHeader("User-Agent", "Talkbox-Client/1.0");
     request.setRawHeader("Accept", "application/json");
-    
-    if (!m_token.isEmpty()) {
-        request.setRawHeader("Authorization", ("Bearer " + m_token).toUtf8());
-    }
     
     return request;
 }

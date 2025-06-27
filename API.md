@@ -24,13 +24,16 @@ Talkbox 是一个基于 Linux 平台的聊天软件后端，使用 HTTP 协议�
 
 ## 身份验证
 
-除了注册和登录接口外，其他接口都需要在HTTP请求头中提供有效的token：
+除了注册和登录接口外，其他接口都需要在请求参数中提供有效的用户名：
 
-```
-Authorization: Bearer <token>
+```json
+{
+    "username": "用户名",
+    // ...其他参数
+}
 ```
 
-token通过登录接口获取，有效期为用户在线期间。
+用户名必须是已登录的在线用户。
 
 ## 用户管理 API
 
@@ -84,8 +87,7 @@ token通过登录接口获取，有效期为用户在线期间。
     "status": "success",
     "data": {
         "user_id": 1,
-        "username": "用户名",
-        "token": "JBAEquRaO9So5RED4jBMuM78xLWdgbkk"
+        "username": "用户名"
     }
 }
 ```
@@ -96,12 +98,12 @@ token通过登录接口获取，有效期为用户在线期间。
 
 **功能**: 用户登出
 
-**请求头**:
+**请求参数**:
+```json
+{
+    "username": "用户名"
+}
 ```
-Authorization: Bearer <token>
-```
-
-**请求参数**: 无需参数
 
 **响应示例**:
 ```json
@@ -111,22 +113,38 @@ Authorization: Bearer <token>
 }
 ```
 
+### 4. 获取用户资料
+
+**接口**: `GET /api/user/profile?username=用户名`
+
+**功能**: 获取用户个人资料
+
+**请求参数**: 通过 URL 查询参数传递
+- `username`: 用户名
+
+**响应示例**:
+```json
+{
+    "status": "success",
+    "data": {
+        "user_id": 1,
+        "username": "用户名"
+    }
+}
+```
+
 ## 即时通讯 API
 
-### 4. 发送消息
+### 5. 发送消息
 
 **接口**: `POST /api/send_message`
 
 **功能**: 发送私聊或群聊消息
 
-**请求头**:
-```
-Authorization: Bearer <token>
-```
-
 **请求参数**:
 ```json
 {
+    "username": "发送者用户名",
     "receiver_id": "接收者ID（私聊时使用）",
     "group_id": "群组ID（群聊时使用）",
     "content": "消息内容",
@@ -149,16 +167,12 @@ Authorization: Bearer <token>
 
 ### 5. 获取消息
 
-**接口**: `GET /api/get_messages`
+**接口**: `GET /api/get_messages?username=用户名`
 
 **功能**: 获取用户相关的所有消息（私聊和群聊）
 
-**请求头**:
-```
-Authorization: Bearer <token>
-```
-
-**请求参数**: 无需参数
+**请求参数**: 通过 URL 查询参数传递
+- `username`: 用户名
 
 **响应示例**:
 ```json
@@ -180,18 +194,14 @@ Authorization: Bearer <token>
 
 ### 6. 获取联系人列表
 
-**接口**: `GET /api/get_contacts`
+**接口**: `GET /api/get_contacts?username=用户名`
 
 **功能**: 获取所有可以私聊的用户列表（除了自己），包含在线状态
 
 **说明**: 返回系统中除自己外的所有用户，无论是否有过聊天记录
 
-**请求头**:
-```
-Authorization: Bearer <token>
-```
-
-**请求参数**: 无需参数
+**请求参数**: 通过 URL 查询参数传递
+- `username`: 用户名
 
 **响应示例**:
 ```json
@@ -222,14 +232,10 @@ Authorization: Bearer <token>
 
 **功能**: 发布新帖子
 
-**请求头**:
-```
-Authorization: Bearer <token>
-```
-
 **请求参数**:
 ```json
 {
+    "username": "发帖用户名",
     "title": "帖子标题",
     "content": "帖子内容"
 }
@@ -273,14 +279,10 @@ Authorization: Bearer <token>
 
 **功能**: 回复指定帖子
 
-**请求头**:
-```
-Authorization: Bearer <token>
-```
-
 **请求参数**:
 ```json
 {
+    "username": "回复用户名",
     "post_id": "帖子ID",
     "content": "回复内容"
 }
@@ -296,21 +298,12 @@ Authorization: Bearer <token>
 
 ### 10. 获取帖子回复
 
-**接口**: `GET /api/get_post_replies`
+**接口**: `GET /api/get_post_replies?post_id=帖子ID`
 
 **功能**: 获取指定帖子的所有回复
 
-**请求头**:
-```
-Content-Type: application/json
-```
-
-**请求参数** (JSON请求体):
-```json
-{
-    "post_id": "帖子ID"
-}
-```
+**请求参数**: 通过 URL 查询参数传递
+- `post_id`: 帖子ID
 
 **响应示例**:
 ```json
@@ -343,14 +336,10 @@ Content-Type: application/json
 
 **功能**: 创建新的聊天群组（创建者自动加入群组）
 
-**请求头**:
-```
-Authorization: Bearer <token>
-```
-
 **请求参数**:
 ```json
 {
+    "username": "创建者用户名",
     "group_name": "群组名称",
     "description": "群组描述"
 }
@@ -370,14 +359,10 @@ Authorization: Bearer <token>
 
 **功能**: 加入指定群组
 
-**请求头**:
-```
-Authorization: Bearer <token>
-```
-
 **请求参数**:
 ```json
 {
+    "username": "用户名",
     "group_id": "群组ID"
 }
 ```
@@ -396,14 +381,10 @@ Authorization: Bearer <token>
 
 **功能**: 退出指定群组
 
-**请求头**:
-```
-Authorization: Bearer <token>
-```
-
 **请求参数**:
 ```json
 {
+    "username": "用户名",
     "group_id": "群组ID"
 }
 ```
@@ -418,20 +399,16 @@ Authorization: Bearer <token>
 
 ### 14. 获取群组列表
 
-**接口**: `GET /api/get_groups`
+**接口**: `GET /api/get_groups?username=用户名` (可选参数)
 
 **功能**: 获取群组列表
 
 **说明**: 
-- 如果提供token，返回该用户加入的群组列表，包含`is_member`字段
-- 如果不提供token，返回所有群组列表，不包含`is_member`字段
+- 如果提供用户名，返回该用户加入的群组列表，包含`is_member`字段
+- 如果不提供用户名，返回所有群组列表，不包含`is_member`字段
 
-**请求头** (可选):
-```
-Authorization: Bearer <token>
-```
-
-**请求参数**: 无需参数
+**请求参数**: 通过 URL 查询参数传递（可选）
+- `username`: 用户名（可选）
 
 **响应示例**:
 ```json
@@ -452,22 +429,13 @@ Authorization: Bearer <token>
 
 ### 15. 获取群组消息
 
-**接口**: `GET /api/get_group_messages`
+**接口**: `GET /api/get_group_messages?username=用户名&group_id=群组ID`
 
 **功能**: 获取指定群组的消息历史
 
-**请求头**:
-```
-Authorization: Bearer <token>
-Content-Type: application/json
-```
-
-**请求参数** (JSON请求体):
-```json
-{
-    "group_id": "群组ID"
-}
-```
+**请求参数**: 通过 URL 查询参数传递
+- `username`: 用户名
+- `group_id`: 群组ID
 
 **响应示例**:
 ```json
@@ -494,14 +462,10 @@ Content-Type: application/json
 
 **功能**: 上传文件到服务器
 
-**请求头**:
-```
-Authorization: Bearer <token>
-```
-
 **请求参数**:
 ```json
 {
+    "username": "上传者用户名",
     "filename": "文件名",
     "data": "文件数据（二进制数据）"
 }
@@ -538,7 +502,7 @@ Authorization: Bearer <token>
 
 ### 常见错误信息
 
-- `"无效的token"`: token验证失败或已过期
+- `"无效的用户名"`: 用户名验证失败或用户未在线
 - `"用户名已存在"`: 注册时用户名重复
 - `"用户名或密码错误"`: 登录时凭据错误
 - `"用户名和密码不能为空"`: 注册或登录时缺少必要参数
@@ -552,8 +516,8 @@ Authorization: Bearer <token>
 
 ## 注意事项
 
-1. 用户必须先登录获取token才能使用大部分功能
-2. token需要在请求头中以 `Authorization: Bearer <token>` 的格式传递
+1. 用户必须先登录才能使用大部分功能
+2. 需要认证的接口必须在请求参数中提供有效的用户名
 3. 群聊需要先创建群组，然后加入群组后才能发送消息
 4. 私聊消息使用 `receiver_id`，群聊消息使用 `group_id`
 5. 文件上传时需要将文件内容编码为字符串形式
@@ -561,6 +525,6 @@ Authorization: Bearer <token>
 7. 上传的文件存储在服务器的 `uploads/` 目录下
 8. 群组创建者会自动加入群组，无需手动加入
 9. 联系人列表返回所有用户（除自己），无论是否有聊天记录
-10. 部分GET接口使用JSON请求体传递参数（如`get_post_replies`、`get_group_messages`）
+10. 部分GET接口使用查询参数传递参数（如`get_user_profile`、`get_messages`等）
 11. 重复加入已加入的群组会返回错误信息
 12. 只有群组成员才能发送群组消息和获取群组消息历史

@@ -1,7 +1,0 @@
-/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles/Talkbox-client.dir
-/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles/run.dir
-/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles/clean-all.dir
-/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles/edit_cache.dir
-/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles/rebuild_cache.dir
-/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles/Talkbox-client_autogen_timestamp_deps.dir
-/home/ltc/Program/Talkbox/Talkbox-client/build/CMakeFiles/Talkbox-client_autogen.dir

@@ -3,6 +3,7 @@
 #include "CreatePost.h"
 #include <QListWidgetItem>
 #include <QJsonArray>
+#include <QMap>
 
 ForumWidget::ForumWidget(QWidget *parent)
     : QWidget(parent)
@@ -40,6 +41,7 @@ void ForumWidget::onCreatePostClicked()
 {
     CreatePost *createDialog = new CreatePost(this);
     createDialog->setHttpClient(m_httpClient);
+    createDialog->setCurrentUsername(m_currentUsername);
     
     // 连接帖子创建成功信号
     connect(createDialog, &CreatePost::postCreated, this, &ForumWidget::refreshPosts);
@@ -115,9 +117,9 @@ void ForumWidget::onHttpResponse(const QJsonObject &response)
                 // 格式化时间显示
                 QString formattedTime = formatTimestamp(timestamp);
                 
-                QString displayText = QString("📝 %1\n👤 作者: 用户%2  🕒 %3\n💬 %4")
+                QString displayText = QString("📝 %1\n👤 作者: %2  🕒 %3\n💬 %4")
                                     .arg(title)
-                                    .arg(userId)
+                                    .arg(getUserDisplayName(userId)) // 使用用户显示名称
                                     .arg(formattedTime)
                                     .arg(shortContent);
                 
@@ -154,4 +156,25 @@ QString ForumWidget::formatTimestamp(const QString &timestamp)
         return "昨天 " + timestamp.split(" ").last();
     }
     return timestamp;
+}
+
+void ForumWidget::setCurrentUsername(const QString &username)
+{
+    m_currentUsername = username;
+}
+
+void ForumWidget::setUserIdToNameMap(const QMap<int, QString> &userMap)
+{
+    m_userIdToNameMap = userMap;
+}
+
+QString ForumWidget::getUserDisplayName(int userId)
+{
+    // 如果在映射中找到用户名，返回用户名
+    if (m_userIdToNameMap.contains(userId)) {
+        return m_userIdToNameMap[userId];
+    }
+    
+    // 否则返回 "用户{ID}" 格式
+    return QString("用户%1").arg(userId);
 }

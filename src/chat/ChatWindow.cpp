@@ -31,6 +31,11 @@ void ChatWindow::setHttpClient(HttpClient *client)
     }
 }
 
+void ChatWindow::setCurrentUsername(const QString &username)
+{
+    m_currentUsername = username;
+}
+
 void ChatWindow::startPrivateChat(int userId, const QString &username)
 {
     m_currentUserId = userId;
@@ -60,11 +65,14 @@ void ChatWindow::refreshMessages()
     if (!m_httpClient) return;
     
     if (m_isGroupChat && m_currentGroupId != -1) {
-        QJsonObject data;
-        data["group_id"] = m_currentGroupId;
-        m_httpClient->post("/api/get_group_messages", data);
+        QJsonObject params;
+        params["username"] = m_currentUsername;
+        params["group_id"] = m_currentGroupId;
+        m_httpClient->get("/api/get_group_messages", params);
     } else if (!m_isGroupChat) {
-        m_httpClient->get("/api/get_messages");
+        QJsonObject params;
+        params["username"] = m_currentUsername;
+        m_httpClient->get("/api/get_messages", params);
     }
 }
 
@@ -74,6 +82,7 @@ void ChatWindow::onSendClicked()
     if (message.isEmpty() || !m_httpClient) return;
     
     QJsonObject data;
+    data["username"] = m_currentUsername;
     data["content"] = message;
     data["type"] = "text";
     
