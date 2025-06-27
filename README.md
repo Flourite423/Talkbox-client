@@ -50,7 +50,7 @@ sudo pacman -S base-devel cmake qt6-base qt6-tools
 
 1. **获取源码**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Flourite423/Talkbox-client.git
    cd Talkbox-client
    ```
 
@@ -115,5 +115,5 @@ Talkbox-client/
 
 ## 许可证
 
-本项目采用 [LICENSE](LICENSE) 许可证发布。
+详细信息请查看 [LICENSE](LICENSE) 文件。
 
