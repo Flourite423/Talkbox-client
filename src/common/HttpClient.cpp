@@ -154,6 +154,12 @@ void HttpClient::onReplyFinished()
     // 清理定时器
     cleanupReply(reply);
     
+    // 检查是否已经被超时处理过（避免双重错误弹窗）
+    if (reply->error() == QNetworkReply::OperationCanceledError) {
+        reply->deleteLater();
+        return;
+    }
+    
     if (reply->error() == QNetworkReply::NoError) {
         QByteArray data = reply->readAll();
         QJsonDocument doc = QJsonDocument::fromJson(data);
