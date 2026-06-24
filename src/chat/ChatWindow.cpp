@@ -91,6 +91,11 @@ void ChatWindow::startPrivateChat(int userId, const QString &username)
     m_isGroupChat = false;
     m_chatTitle = "私聊 - " + username;
     
+    // 重置无限滚动状态
+    m_isLoadingMore = false;
+    m_oldestMessageId = -1;
+    m_hasMoreMessages = true;
+    
     ui->chatTitleLabel->setText(m_chatTitle);
     ui->messagesTextEdit->clear();
     refreshMessages();
@@ -106,6 +111,11 @@ void ChatWindow::startGroupChat(int groupId, const QString &groupName)
     m_isGroupChat = true;
     m_chatTitle = "群聊 - " + groupName;
     
+    // 重置无限滚动状态
+    m_isLoadingMore = false;
+    m_oldestMessageId = -1;
+    m_hasMoreMessages = true;
+    
     ui->chatTitleLabel->setText(m_chatTitle);
     ui->messagesTextEdit->clear();
     refreshMessages();
@@ -118,16 +128,20 @@ void ChatWindow::refreshMessages()
 {
     if (!m_httpClient) return;
     
+    // 确保有有效的聊天目标
     if (m_isGroupChat && m_currentGroupId != -1) {
         QJsonObject params;
         params["username"] = m_currentUsername;
         params["group_id"] = QString::number(m_currentGroupId);
+        params["limit"] = MESSAGE_LOAD_LIMIT;
         m_httpClient->get("/api/get_group_messages", params);
-    } else if (!m_isGroupChat) {
+    } else if (!m_isGroupChat && m_currentUserId != -1) {
         QJsonObject params;
         params["username"] = m_currentUsername;
+        params["limit"] = MESSAGE_LOAD_LIMIT;
         m_httpClient->get("/api/get_messages", params);
     }
+    // 如果没有有效的聊天目标，不发送请求
 }
 
 void ChatWindow::onSendClicked()
@@ -399,8 +413,17 @@ void ChatWindow::onHttpResponse(const QJsonObject &response)
 
 void ChatWindow::onAutoRefresh()
 {
-    // 自动刷新消息
-    refreshMessages();
+    // 只有当用户在底部时才自动刷新，避免与无限滚动冲突
+    QScrollBar *scrollBar = ui->messagesTextEdit->verticalScrollBar();
+    bool atBottom = (scrollBar->value() >= scrollBar->maximum() - 10);
+    
+    if (atBottom || m_oldestMessageId == -1) {
+        // 重置滚动状态，获取最新消息
+        m_isLoadingMore = false;
+        m_oldestMessageId = -1;
+        m_hasMoreMessages = true;
+        refreshMessages();
+    }
 }
 
 QString ChatWindow::formatTimestamp(const QString &timestamp)
@@ -541,7 +564,7 @@ void ChatWindow::saveDownloadedFile(const QString &/*fileName*/, const QString &
 
 void ChatWindow::loadMoreMessages()
 {
-    if (m_isLoadingMore || !m_hasMoreMessages || m_oldestMessageId <= 0) {
+    if (m_isLoadingMore || !m_hasMoreMessages || m_oldestMessageId <= 0 || !m_httpClient) {
         return;
     }
     
@@ -560,6 +583,9 @@ void ChatWindow::loadMoreMessages()
         params["limit"] = MESSAGE_LOAD_LIMIT;
         params["before_id"] = m_oldestMessageId;
         m_httpClient->get("/api/get_messages", params);
+    } else {
+        // 无有效聊天目标，重置状态
+        m_isLoadingMore = false;
     }
 }
 
