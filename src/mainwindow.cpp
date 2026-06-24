@@ -11,6 +11,13 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
     , m_httpClient(new HttpClient(this))
+    , m_contactListHttpClient(new HttpClient(this))
+    , m_chatWindowHttpClient(new HttpClient(this))
+    , m_groupChatWindowHttpClient(new HttpClient(this))
+    , m_groupManagerHttpClient(new HttpClient(this))
+    , m_forumWidgetHttpClient(new HttpClient(this))
+    , m_postDetailHttpClient(new HttpClient(this))
+    , m_createPostHttpClient(new HttpClient(this))
     , m_userId(-1)
     , m_loginSuccessful(false)
 {
@@ -49,13 +56,13 @@ void MainWindow::setupUI()
     m_postDetail = new PostDetail(this);
     m_createPost = new CreatePost(this);
     
-    // 设置HTTP客户端
-    m_contactList->setHttpClient(m_httpClient);
-    m_chatWindow->setHttpClient(m_httpClient);
-    m_groupManager->setHttpClient(m_httpClient);
-    m_forumWidget->setHttpClient(m_httpClient);
-    m_postDetail->setHttpClient(m_httpClient);
-    m_createPost->setHttpClient(m_httpClient);
+    // 设置HTTP客户端 - 每个组件使用独立的 HttpClient
+    m_contactList->setHttpClient(m_contactListHttpClient);
+    m_chatWindow->setHttpClient(m_chatWindowHttpClient);
+    m_groupManager->setHttpClient(m_groupManagerHttpClient);
+    m_forumWidget->setHttpClient(m_forumWidgetHttpClient);
+    m_postDetail->setHttpClient(m_postDetailHttpClient);
+    m_createPost->setHttpClient(m_createPostHttpClient);
     
     // 设置布局 - 聊天标签页
     QVBoxLayout *contactLayout = new QVBoxLayout(ui->contactWidget);
@@ -70,7 +77,7 @@ void MainWindow::setupUI()
     
     // 群聊窗口复用聊天窗口组件，但需要另一个实例
     m_groupChatWindow = new ChatWindow(this);
-    m_groupChatWindow->setHttpClient(m_httpClient);
+    m_groupChatWindow->setHttpClient(m_groupChatWindowHttpClient);
     QVBoxLayout *groupChatLayout = new QVBoxLayout(ui->groupChatWidget);
     groupChatLayout->addWidget(m_groupChatWindow);
     
@@ -124,6 +131,13 @@ void MainWindow::onLoginSuccessful(const QString &token, const QString &username
     m_loginSuccessful = true;
     
     m_httpClient->setUsername(username);
+    m_contactListHttpClient->setUsername(username);
+    m_chatWindowHttpClient->setUsername(username);
+    m_groupChatWindowHttpClient->setUsername(username);
+    m_groupManagerHttpClient->setUsername(username);
+    m_forumWidgetHttpClient->setUsername(username);
+    m_postDetailHttpClient->setUsername(username);
+    m_createPostHttpClient->setUsername(username);
     
     // 设置各组件的当前用户名
     m_contactList->setCurrentUsername(username);
@@ -161,6 +175,13 @@ void MainWindow::onLogoutClicked()
     m_userId = -1;
     m_loginSuccessful = false;
     m_httpClient->setUsername("");
+    m_contactListHttpClient->setUsername("");
+    m_chatWindowHttpClient->setUsername("");
+    m_groupChatWindowHttpClient->setUsername("");
+    m_groupManagerHttpClient->setUsername("");
+    m_forumWidgetHttpClient->setUsername("");
+    m_postDetailHttpClient->setUsername("");
+    m_createPostHttpClient->setUsername("");
     
     ui->userLabel->setText("未登录");
     setWindowTitle("Talkbox - 聊天软件");

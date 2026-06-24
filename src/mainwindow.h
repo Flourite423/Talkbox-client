@@ -42,7 +42,16 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    HttpClient *m_httpClient;
+    
+    // 每个组件使用独立的 HttpClient（避免信号冲突）
+    HttpClient *m_httpClient;  // 主 HttpClient（用于登录等）
+    HttpClient *m_contactListHttpClient;
+    HttpClient *m_chatWindowHttpClient;
+    HttpClient *m_groupChatWindowHttpClient;
+    HttpClient *m_groupManagerHttpClient;
+    HttpClient *m_forumWidgetHttpClient;
+    HttpClient *m_postDetailHttpClient;
+    HttpClient *m_createPostHttpClient;
     
     // 用户信息
     QString m_token;
