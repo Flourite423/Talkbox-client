@@ -53,12 +53,21 @@ private:
     QString m_downloadSavePath;    // 文件保存路径
     QString m_pendingFileName; // 等待发送消息的文件名
     
+    // 无限滚动加载相关
+    bool m_isLoadingMore;  // 是否正在加载更多消息
+    int m_oldestMessageId; // 当前最早的消息ID，用于加载更多
+    bool m_hasMoreMessages; // 是否还有更多消息可加载
+    static const int MESSAGE_LOAD_LIMIT = 50; // 每次加载的消息数量
+    
     QString getUserDisplayName(int userId);  // 获取用户显示名称
     QString formatTimestamp(const QString &timestamp); // 格式化时间戳
     void scrollToBottom(); // 滚动到底部
+    void scrollToTop(); // 滚动到顶部
     int getCurrentUserIdFromUsername(); // 根据当前用户名获取用户ID
     void downloadFile(const QString &fileName); // 下载文件
     void saveDownloadedFile(const QString &fileName, const QString &fileData); // 保存下载的文件
+    void loadMoreMessages(); // 加载更多消息（向上滚动时）
+    void onScrollValueChanged(int value); // 滚动条值变化处理
 };
 
 #endif // CHATWINDOW_H

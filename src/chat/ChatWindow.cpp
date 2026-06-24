@@ -24,6 +24,9 @@ ChatWindow::ChatWindow(QWidget *parent)
     , m_currentGroupId(-1)
     , m_isGroupChat(false)
     , m_refreshTimer(new QTimer(this))
+    , m_isLoadingMore(false)
+    , m_oldestMessageId(-1)
+    , m_hasMoreMessages(true)
 {
     ui->setupUi(this);
     
@@ -37,6 +40,10 @@ ChatWindow::ChatWindow(QWidget *parent)
     
     // 连接锚点点击信号
     connect(ui->messagesTextEdit, &QTextBrowser::anchorClicked, this, &ChatWindow::onAnchorClicked);
+    
+    // 连接滚动条信号，用于无限滚动加载
+    QScrollBar *scrollBar = ui->messagesTextEdit->verticalScrollBar();
+    connect(scrollBar, &QScrollBar::valueChanged, this, &ChatWindow::onScrollValueChanged);
     
     // 设置自动刷新定时器（每5秒刷新一次）
     m_refreshTimer->setInterval(5000);
@@ -245,23 +252,41 @@ void ChatWindow::onHttpResponse(const QJsonObject &response)
             }
             
             if (isMessageResponse) {
-                
-                // ...existing code...
-                ui->messagesTextEdit->clear();
                 QJsonArray messages = dataArray;
+                
+                // 判断是初始加载还是加载更多
+                bool isInitialLoad = (m_oldestMessageId == -1);
+                
+                // 更新 hasMoreMessages 状态
+                m_hasMoreMessages = (messages.size() >= MESSAGE_LOAD_LIMIT);
                 
                 // 判断是否是当前用户发送的消息
                 int currentUserId = getCurrentUserIdFromUsername();
                 
+                // 如果是加载更多，保存当前滚动位置
+                int scrollPosition = 0;
+                if (!isInitialLoad) {
+                    QScrollBar *scrollBar = ui->messagesTextEdit->verticalScrollBar();
+                    scrollPosition = scrollBar->value();
+                }
+                
+                // 构建消息HTML
+                QString messagesHtml;
+                int firstMessageId = -1;
+                
                 for (const auto &value : messages) {
                     QJsonObject msg = value.toObject();
+                    int messageId = msg["message_id"].toInt();
                     int senderId = msg["sender_id"].toInt();
                     QString content = msg["content"].toString();
                     QString timestamp = msg["timestamp"].toString();
                     QString type = msg["type"].toString();
                     
-                        
-                    // ...existing code...
+                    // 记录最早的消息ID
+                    if (firstMessageId == -1 || messageId < firstMessageId) {
+                        firstMessageId = messageId;
+                    }
+                    
                     QString senderName = getUserDisplayName(senderId);
                     
                     // 判断是否是当前用户发送的消息
@@ -274,7 +299,6 @@ void ChatWindow::onHttpResponse(const QJsonObject &response)
                         shouldDisplay = (groupId == m_currentGroupId);
                     } else {
                         int receiverId = msg["receiver_id"].toInt();
-                        // 判断是否与当前私聊用户相关的消息
                         shouldDisplay = (senderId == m_currentUserId) || (receiverId == m_currentUserId);
                     }
                     
@@ -283,7 +307,6 @@ void ChatWindow::onHttpResponse(const QJsonObject &response)
                         QString timeStr = formatTimestamp(timestamp);
                         
                         if (isMyMessage) {
-                            // 自己的消息
                             if (type == "file") {
                                 displayText = QString("<div style='margin: 3px 0; color: #333;'>"
                                                     "<span style='font-size: 11px; color: #666;'>[%1]</span> "
@@ -302,7 +325,6 @@ void ChatWindow::onHttpResponse(const QJsonObject &response)
                                             .arg(content);
                             }
                         } else {
-                            // 别人的消息
                             if (type == "file") {
                                 displayText = QString("<div style='margin: 3px 0; color: #333;'>"
                                                     "<span style='font-size: 11px; color: #666;'>[%1]</span> "
@@ -323,12 +345,34 @@ void ChatWindow::onHttpResponse(const QJsonObject &response)
                                             .arg(content);
                             }
                         }
-                        ui->messagesTextEdit->insertHtml(displayText);
-                        ui->messagesTextEdit->insertPlainText("\n"); // 添加换行
-                        ui->messagesTextEdit->moveCursor(QTextCursor::End);
+                        messagesHtml += displayText + "\n";
                     }
                 }
-                scrollToBottom();
+                
+                // 更新 m_oldestMessageId
+                if (firstMessageId > 0) {
+                    m_oldestMessageId = firstMessageId;
+                }
+                
+                // 根据是初始加载还是加载更多，决定如何显示消息
+                if (isInitialLoad) {
+                    // 初始加载：清空并显示所有消息
+                    ui->messagesTextEdit->clear();
+                    ui->messagesTextEdit->setHtml(messagesHtml);
+                    scrollToBottom();
+                } else {
+                    // 加载更多：在现有内容前面插入
+                    QTextCursor cursor = ui->messagesTextEdit->textCursor();
+                    cursor.movePosition(QTextCursor::Start);
+                    cursor.insertHtml(messagesHtml);
+                    
+                    // 恢复滚动位置
+                    QScrollBar *scrollBar = ui->messagesTextEdit->verticalScrollBar();
+                    scrollBar->setValue(scrollPosition);
+                }
+                
+                // 重置加载状态
+                m_isLoadingMore = false;
             } else {
                 // 忽略其他数组响应（如联系人列表、群组列表、论坛帖子等）
             }
@@ -493,4 +537,43 @@ void ChatWindow::saveDownloadedFile(const QString &/*fileName*/, const QString &
     } else {
         QMessageBox::warning(this, "错误", "无法保存文件: " + file.errorString());
     }
+}
+
+void ChatWindow::loadMoreMessages()
+{
+    if (m_isLoadingMore || !m_hasMoreMessages || m_oldestMessageId <= 0) {
+        return;
+    }
+    
+    m_isLoadingMore = true;
+    
+    if (m_isGroupChat && m_currentGroupId != -1) {
+        QJsonObject params;
+        params["username"] = m_currentUsername;
+        params["group_id"] = QString::number(m_currentGroupId);
+        params["limit"] = MESSAGE_LOAD_LIMIT;
+        params["before_id"] = m_oldestMessageId;
+        m_httpClient->get("/api/get_group_messages", params);
+    } else if (!m_isGroupChat && m_currentUserId != -1) {
+        QJsonObject params;
+        params["username"] = m_currentUsername;
+        params["limit"] = MESSAGE_LOAD_LIMIT;
+        params["before_id"] = m_oldestMessageId;
+        m_httpClient->get("/api/get_messages", params);
+    }
+}
+
+void ChatWindow::onScrollValueChanged(int value)
+{
+    // 当滚动条到达顶部时，加载更多消息
+    QScrollBar *scrollBar = ui->messagesTextEdit->verticalScrollBar();
+    if (value <= scrollBar->minimum() + 10 && !m_isLoadingMore && m_hasMoreMessages) {
+        loadMoreMessages();
+    }
+}
+
+void ChatWindow::scrollToTop()
+{
+    QScrollBar *scrollBar = ui->messagesTextEdit->verticalScrollBar();
+    scrollBar->setValue(scrollBar->minimum());
 }
