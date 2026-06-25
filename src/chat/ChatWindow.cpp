@@ -182,13 +182,13 @@ void ChatWindow::onSendFileClicked()
     
     QFileInfo fileInfo(filePath);
     QString fileName = fileInfo.fileName();
-    QString utf8Data = QString::fromUtf8(fileData);
+    QString base64Data = fileData.toBase64();
     
     // 首先上传文件到服务器
     QJsonObject uploadData;
     uploadData["username"] = m_currentUsername;
     uploadData["filename"] = fileName;
-    uploadData["data"] = utf8Data;
+    uploadData["data"] = base64Data;
     
     // 存储文件名，用于上传成功后发送消息
     m_pendingFileName = fileName;
